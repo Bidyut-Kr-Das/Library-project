@@ -159,21 +159,22 @@ body {
     color: white;
 }
 #textArea{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 50rem;
 }
 #bookInfo{
     float: left;
+    margin-top: 4rem;
     margin-left: .2rem;
     height: 49rem;
     width: 52%;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 #confirmation{
     float: right;
     height: 49rem;
     width: 47.5%;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 #bookname{
     font-size: 5rem;
@@ -194,4 +195,53 @@ body {
 #description{
     padding: 2rem;
     font-size:2rem ;
+}
+#confirmationText{
+    margin-top: 15rem;
+    font-size: 4rem;
+    text-align: center;
+}
+#buttonDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.buttonDiv{
+    display: inline;
+    margin-top: 4rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    height: 4rem;
+    width: 16rem;
+}
+#confirmButton,#cancelButton{
+    border-radius: 4rem;
+    height: 100%;
+    width: 100%;
+}
+#confirmButton{
+    background-color: transparent;
+    border: .4rem solid #03C04A;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #03C04A;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#confirmButton:hover{
+    background-color: #03C04A;
+    color: white;
+}
+#cancelButton{
+    border: .4rem solid #E3242B;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #E3242B;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#cancelButton:hover{
+    background-color: #E3242B;
+    color: white;
 }

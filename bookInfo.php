@@ -12,6 +12,12 @@
     $result2=mysqli_query($connection,$query2);
     $rowarr2=mysqli_fetch_array($result2);
 
+    if(!empty($_REQUEST['mode1'])){
+        $query3="INSERT INTO `bookstaken` SET `student-id`='$id',
+                                                                                            `book-id`='$bookId'";
+        $result3=mysqli_query($connection,$query3);
+        header("location:LibraryHomepage.php");
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,16 +40,25 @@
                     </div>
                 </div>
                 <div id="textArea">
+                    <?php
+                    if($rowarr2==NULL){
+                    ?>
+                    <div id="bookInfo">Book is not available!</div>
+                    <?php
+                    }
+                    else{
+                    ?>
+                    ?>
                     <div id="bookInfo">
                         <div id="bookname"><?php echo $rowarr2['Book name']?></div>
                         <div id="bookAuthor">Author: <?php echo $rowarr2['Author']?></div>
                         <div id="description">Description: </div>
                     </div>
                     <div id="confirmation">
-                        <div id="confirmationText">Confirm your purchase</div>
+                        <div id="confirmationText">Confirm your purchase?</div>
                         <div id="buttonDiv">
-                            <form action="" class="buttonDiv">
-                                <input type="hidden" name="mode1">
+                            <form action="#" class="buttonDiv">
+                                <input type="hidden" name="mode1" value="1">
                                 <input type="submit" name="confirm" id="confirmButton" value="Confirm">
                             </form>
                             <form action="" class="buttonDiv">
@@ -52,6 +67,9 @@
                             </form>
                         </div>
                     </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

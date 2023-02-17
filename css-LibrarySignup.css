@@ -1,0 +1,550 @@
+@font-face {
+    font-family: poppins;
+    src: url(fonts/Poppins-Regular.ttf);
+}
+@font-face {
+    font-family: itim;
+    src: url(fonts/Itim-Regular.ttf);
+}
+html {
+    font-size: 62.5%;
+    font-family: poppins;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    /* overflow-y: hidden; */
+}
+
+#bgImage {
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(to top right, #7286D3, #8EA7E9, #E5E0FF, #FFF2F2);
+    /* background-image:url(images/BgImage3.jpg); */
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
+}
+
+#secondDiv {
+    position: absolute;
+    left: 15rem;
+    top: 5rem;
+    background-color: WHITE;
+    height: 60rem;
+    width: 120rem;
+    border-radius: 1rem;
+    transition: 1s;
+    box-shadow: .5rem .5rem 2rem grey;
+}
+
+#jointext {
+    font-size: 4rem;
+    margin-left: 3rem;
+    margin-top: 3rem;
+    color: #A084DC;
+    font-family: itim;
+    text-decoration: underline;
+}
+
+#us {
+    color: #7286D3;
+    font-family: itim;
+    text-decoration: underline;
+    text-decoration-color: white;
+}
+
+/* #textDiv {
+    position: absolute;
+    top: 10rem;
+    left: 15rem;
+    height: 50rem;
+    width: 65rem;
+    font-size: 5rem;
+    background: linear-gradient(to right, #3F0071, #FB2576, #332FD0, #0002A1);
+    background-clip: none;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeIn 5s 6s ease forwards;
+
+    text-align: center;
+    border: 1px solid red;
+    padding-top: 10rem;
+}
+#Fname,
+#Mname,
+#Lname,
+#Mobile,
+#username,
+#Password,
+#confPassword {
+
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    height: 3rem;
+    width: 38rem;
+    border: .3rem solid #645CBB;
+    border-radius: 2rem;
+    padding-left: 2rem;
+    letter-spacing: .2rem;
+    font-size: 2rem;
+    outline: none;
+    color:#0002A1 ;
+}
+
+
+::placeholder {
+    color: #645CBB;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+#signup{
+    height: 4rem;
+    width: 40.2rem;
+    margin-top: 2rem;
+    margin-left: 3rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: #A084DC;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    transition: 0.3s;
+}
+#signup:hover{
+    background-color: #645CBB;
+    height: 4.5rem;
+    width: 40.7rem;
+} */
+#fields1,#fields2,#fields3,#fields4,#fields5{
+    position: relative;
+    height: 1rem;
+    width: 100%;
+    margin-top: 8rem;
+}
+#fields6,#fields7{
+    position: relative;
+}
+#errormsg1{
+    position: absolute;
+    top: 4.4rem;
+    left: 3rem;
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+#errormsg2{
+    position: absolute;
+    top: 4.4rem;
+    left: 3rem;
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+#fields1{
+    margin-top: 6rem;
+}
+#Fname,#Mname,#Lname{
+    margin-left: 2rem;
+    height: 4rem;
+    width: 29.2%;
+    outline: none;
+    border: .5rem solid #7286D3;
+    border-radius: 3rem;
+    transition: 0.5s;
+    color: #4b464b;
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: itim ;
+    letter-spacing: .2rem;
+    padding-left: 1rem;
+    background-color: transparent;
+}
+/*-------------------------Texts for fName,mName and lName------------------------*/
+#FnameText{
+    font-size: 1.9rem;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #7286D3;
+    position: absolute;
+    top: 1rem;
+    left: 4rem;
+    transition: 0.5s;
+    pointer-events: none;
+}
+#MnameText{
+    font-size: 1.9rem;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #7286D3;
+    position: absolute;
+    top: 1rem;
+    left: 44rem;
+    transition: 0.5s;
+    pointer-events: none;
+}
+#LnameText{
+    font-size: 1.9rem;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #7286D3;
+    position: absolute;
+    top: 1rem;
+    left: 84rem;
+    transition: 0.5s;
+    pointer-events: none;
+}
+/*-------------animation of Fname--------------*/
+#Fname:focus+#FnameText{
+    top: -2.5rem;
+    left: 3rem;
+    font-size: 1.5rem;
+    color: #03C04A;
+}
+#Fname:focus{
+    border: .5rem solid #03C04A;
+}
+#Fname:valid+#FnameText{
+    top: -2.5rem;
+    left: 3rem;
+    font-size: 1.5rem;
+}
+/*-------------animation of Mname--------------*/
+
+#Mname:focus+#MnameText{
+    top: -2.5rem;
+    left: 43rem;
+    font-size: 1.5rem;
+    color: #03C04A;
+}
+#Mname:focus{
+    border: .5rem solid #03C04A;
+}
+#Mname:valid+#MnameText{
+    top: -2.5rem;
+    left: 43rem;
+    font-size: 1.5rem;
+}
+/*-------------animation of Lname--------------*/
+
+#Lname:focus+#LnameText{
+    top: -2.5rem;
+    left: 83rem;
+    font-size: 1.5rem;
+    color: #03C04A;
+}
+#Lname:focus{
+    border: .5rem solid #03C04A;
+}
+#Lname:valid+#LnameText{
+    top: -2.5rem;
+    left: 83rem;
+    font-size: 1.5rem;
+}
+/*-------------input fields for mobile and phone number------------*/
+#Mobile,#email{
+    margin-left: 2rem;
+    height: 4rem;
+    width: 45.5%;
+    outline: none;
+    border: .5rem solid #7286D3;
+    border-radius: 3rem;
+    transition: 0.5s;
+    color: #4b464b;
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: itim ;
+    letter-spacing: .2rem;
+    padding-left: 1rem;
+    background-color: transparent;
+}
+/*-------------texts for mobile and email----------------*/
+#mobileText{
+    font-size: 1.9rem;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #7286D3;
+    position: absolute;
+    top: 1rem;
+    left: 4rem;
+    transition: 0.5s;
+    pointer-events: none;
+}
+#emailText{
+    font-size: 1.9rem;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #7286D3;
+    position: absolute;
+    top: 1rem;
+    left: 64rem;
+    transition: 0.5s;
+    pointer-events: none;
+}
+/*-------------animation of Mobile--------------*/
+
+#Mobile:focus+#mobileText{
+    top: -2.5rem;
+    left: 3rem;
+    font-size: 1.5rem;
+    color: #03C04A;
+}
+#Mobile:focus{
+    border: .5rem solid #03C04A;
+}
+#Mobile:valid+#mobileText{
+    top: -2.5rem;
+    left: 3rem;
+    font-size: 1.5rem;
+}
+/*-------------animation of Email--------------*/
+
+#email:focus+#emailText{
+    top: -2.5rem;
+    left: 63rem;
+    font-size: 1.5rem;
+    color: #03C04A;
+}
+#email:focus{
+    border: .5rem solid #03C04A;
+}
+#email:valid~#emailText{
+    top: -2.5rem;
+    left: 63rem;
+    font-size: 1.5rem;
+}
+/*-----------input fields for username------------*/
+#username{
+    margin-left: 2rem;
+    height: 4rem;
+    width: 95%;
+    outline: none;
+    border: .5rem solid #7286D3;
+    border-radius: 3rem;
+    transition: 0.5s;
+    color: #4b464b;
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: itim ;
+    letter-spacing: .2rem;
+    padding-left: 1rem;
+    background-color: transparent;
+}
+/*-------------texts for username----------------*/
+#usernameText{
+    font-size: 1.9rem;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #7286D3;
+    position: absolute;
+    top: 1rem;
+    left: 4rem;
+    transition: 0.5s;
+    pointer-events: none;
+}
+/*-------------Animation of username----------------*/
+#username:focus~#usernameText{
+    top: -2.5rem;
+    left: 3rem;
+    font-size: 1.5rem;
+    color: #03C04A;
+}
+#username:focus{
+    border: .5rem solid #03C04A;
+}
+#username:valid~#usernameText{
+    top: -2.5rem;
+    left: 3rem;
+    font-size: 1.5rem;
+}
+/*-----------input fields for passwords------------*/
+#Password,#confPassword{
+    margin-left: 2rem;
+    height: 4rem;
+    width: 45.5%;
+    outline: none;
+    border: .5rem solid #7286D3;
+    border-radius: 3rem;
+    transition: 0.5s;
+    color: #4b464b;
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: itim ;
+    letter-spacing: .2rem;
+    padding-left: 1rem;
+    background-color: transparent;
+}
+/*-------------texts for password and confirm password----------------*/
+#passwordText{
+    font-size: 1.9rem;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #7286D3;
+    position: absolute;
+    top: 1rem;
+    left: 4rem;
+    transition: 0.5s;
+    pointer-events: none;
+}
+#confPasswordText{
+    font-size: 1.9rem;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #7286D3;
+    position: absolute;
+    top: 1rem;
+    left: 64rem;
+    transition: 0.5s;
+    pointer-events: none;
+}
+/*-------------Animation of password----------------*/
+#Password:focus~#passwordText{
+    top: -2.5rem;
+    left: 3rem;
+    font-size: 1.5rem;
+    color: #03C04A;
+}
+#Password:focus{
+    border: .5rem solid #03C04A;
+}
+#Password:valid~#passwordText{
+    top: -2.5rem;
+    left: 3rem;
+    font-size: 1.5rem;
+}
+/*-------------Animation of confirm password----------------*/
+#confPassword:focus+#confPasswordText{
+    top: -2.5rem;
+    left: 63rem;
+    font-size: 1.5rem;
+    color: #03C04A;
+}
+#confPassword:focus{
+    border: .5rem solid #03C04A;
+}
+#confPassword:valid~#confPasswordText{
+    top: -2.5rem;
+    left: 63rem;
+    font-size: 1.5rem;
+}
+/*---------------------------------signup button---------------------------------*/
+#signup{
+    margin-left: 2rem;
+    height: 5rem;
+    width: 30rem;
+    border-radius: 3rem;
+    border: .4rem solid #6060d8;
+    background-color: transparent;
+    color:#4b464b ;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    letter-spacing: .2rem;
+    transition: 0.2s;
+}
+#signup:hover{
+    color: white;
+    background-color: #6060d8;
+}
+/*-----------------------------Transition animations------------------------------------*/
+/* .hello {
+    visibility: hidden;
+	-webkit-animation: fade-in 0.5s ease-in 0.2s forwards;
+	        animation: fade-in 0.5s ease-in 0.2s forwards;
+} */
+.slide-right-Fname {
+    visibility: hidden;
+	-webkit-animation: slide-right 0.5s ease-in 0.2s forwards;
+	        animation: slide-right 0.5s ease-in 0.2s forwards;
+}
+.slide-right-Mname {
+    visibility: hidden;
+	-webkit-animation: slide-right 0.5s ease-in 0.3s forwards;
+	        animation: slide-right 0.5s ease-in 0.3s forwards;
+}
+.slide-right-Lname {
+    visibility: hidden;
+	-webkit-animation: slide-right 0.5s ease-in 0.4s forwards;
+	        animation: slide-right 0.5s ease-in 0.4s forwards;
+}
+.slide-right-mobile {
+    visibility: hidden;
+	-webkit-animation: slide-right 0.5s ease-in 0.5s forwards;
+	        animation: slide-right 0.5s ease-in 0.5s forwards;
+}
+.slide-right-email {
+    visibility: hidden;
+	-webkit-animation: slide-right 0.5s ease-in 0.6s forwards;
+	        animation: slide-right 0.5s ease-in 0.6s forwards;
+}
+.slide-right-username {
+    visibility: hidden;
+	-webkit-animation: slide-right 0.5s ease-in 0.7s forwards;
+	        animation: slide-right 0.5s ease-in 0.7s forwards;
+}
+.slide-right-pass {
+    visibility: hidden;
+	-webkit-animation: slide-right 0.5s ease-in 0.8s forwards;
+	        animation: slide-right 0.5s ease-in 0.8s forwards;
+}
+.slide-right-confPass {
+    visibility: hidden;
+	-webkit-animation: slide-right 0.5s ease-in 0.9s forwards;
+	        animation: slide-right 0.5s ease-in 0.9s forwards;
+}
+.slide-right-submit {
+    visibility: hidden;
+	-webkit-animation: slide-right 0.5s ease-in 1s forwards;
+	        animation: slide-right 0.5s ease-in 1s forwards;
+}
+@-webkit-keyframes slide-right {
+    0% {
+      -webkit-transform: translateX(-10rem);
+              transform: translateX(-10rem);
+              opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+              opacity: 1;
+              visibility:visible ;
+    }
+  }
+  @keyframes slide-right {
+    0% {
+      -webkit-transform: translateX(-10rem);
+              transform: translateX(-10rem);
+              opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+              opacity: 1;
+              visibility: visible;
+    }
+  }
+.hello {
+    -webkit-animation: fade-in 0.3s ease-in both;
+        animation: fade-in 0.3s ease-in both;
+} 
+@-webkit-keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

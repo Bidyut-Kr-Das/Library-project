@@ -1,0 +1,163 @@
+@font-face {
+    font-family: poppins;
+    src: url(fonts/Poppins-Regular.ttf);
+}
+@font-face {
+    font-family: itim;
+    src: url(fonts/Itim-Regular.ttf);
+}
+html{
+    font-size: 62.5%;
+    font-family: poppins;
+
+}
+body{
+    margin: 0;
+    padding: 0;
+    
+    /* overflow-y: hidden; */
+}
+#bgImage{
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(to top right,#7286D3,#8EA7E9,#E5E0FF,#FFF2F2);
+    /* background-image:url(images/BgImage3.jpg); */
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
+}
+#errormsg{
+    font-size: 2rem;
+    color: red;
+
+}
+#wrongpass{
+    font-size: 1.3rem;
+    color: red;
+}
+#textDiv{
+    position:absolute;
+    top: 10rem;
+    left:15rem;
+    height: 50rem;
+    width: 65rem;
+    font-size: 12rem;
+    color: #00337C;
+    text-align: center;
+    /* border: 1px solid red; */
+    padding-top: 10rem;
+    font-family: itim;
+}
+#to{
+    color: #1C82AD;
+}
+#textDiv2{
+    margin-top:1rem ;
+    color: white;
+}
+#mainDiv{
+    position: absolute;
+    top: 10rem;
+    right: 15rem;
+    height: 50rem;
+    width: 45rem;
+    /* border: .35rem solid rgba(255,255,255,0.6); */
+    border-radius: 1rem;
+    /* background-color: rgba(255,255,255,0.01); */
+    box-shadow: .5rem .5rem 2rem grey;
+    padding-right: 2rem;
+    background-color: white;
+    /* gap: 2rem; */
+}
+#loginText{
+    height: 5rem;
+    width: 100%;
+    font-size: 3rem;
+    color: #A084DC;
+    padding: 2rem;
+    padding-left: 0;
+    margin-top: 2rem;
+    margin-left:3rem;
+}
+#login{
+    color: #645CBB;
+}
+#inputfield1,#inputfield2,#thirdDiv,#forthDiv,#register{
+    position: relative;
+    display: block;
+    height: 5rem;
+    /* width: 100%; */
+    margin-left: 3rem;
+    margin-right:5rem;
+}
+#inputbox1,#inputbox2{
+    height: 4rem;
+    width: 40rem;
+    border-radius:3rem;
+    border: .4rem solid #645CBB;
+    transition: 0.5s;
+    padding-left: 1rem;
+    font-size: 1.8rem;
+}
+#inputbox1:focus,
+#inputbox1:valid,
+#inputbox2:focus,
+#inputbox2:valid{
+    border: .4rem solid #A084DC;
+    outline: none;   
+}
+#inputbox1:focus ~ #usernameText,
+#inputbox1:valid ~ #usernameText{
+    
+    top: 0.8rem;
+    
+    font-size: 1.3rem;
+}
+#inputfield1,#inputfield2{
+    padding: 3rem;
+    padding-left: 0;
+}
+#usernameText,#passwordText{
+    position: absolute;
+    left: 2rem;
+    top: 4.4rem;
+    font-size: 1.5rem;
+    letter-spacing: .2rem;
+    color: #645CBB;
+    font-weight: bold;
+    transition: 0.5s;
+    pointer-events: none;
+}
+#inputbox2:focus ~ #passwordText,
+#inputbox2:valid ~ #passwordText{
+    
+    top: 0.8rem;
+    
+    font-size: 1.3rem;
+}
+#checkbox1{
+    height: 2rem;
+    width: 2rem;
+    accent-color: #645CBB;
+}
+#rememberME{
+    position: absolute;
+    top: -0.2rem;
+    left: 3rem;    
+    font-size: 1.7rem;
+    color: #645CBB;
+}
+#Submit{
+    height: 3.5rem;
+    width: 10rem;
+    letter-spacing: 0.2rem;
+    font-size: 1.5rem;
+    background-color:#645CBB;
+    border: none;
+    color: white;
+    border-radius: 1rem;
+}
+#register{
+    font-size: 1.5rem;
+}
+
+

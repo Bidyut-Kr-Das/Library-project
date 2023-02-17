@@ -1,0 +1,197 @@
+@font-face {
+    font-family: poppins;
+    src: url(fonts/Poppins-Regular.ttf);
+}
+@font-face {
+    font-family: itim;
+    src: url(fonts/Itim-Regular.ttf);
+}
+:root{
+    --height1:100vh;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: poppins;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /* overflow-y: hidden; */
+    /* overflow-x: hidden; */
+}
+
+#bgImage {
+    height: var(--height1);
+    width: 100%;
+    background-size: cover;
+    background-image: linear-gradient(to top right, #6060d8, #949af2);
+}
+#supermainDiv{
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    width: 95%;
+    box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.5);
+}
+
+#mainDiv {
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    height: 65rem;
+    width: 100%;
+    background-color: whitesmoke;
+    
+    /* border-radius: 1.8rem; */
+}
+
+#logo {
+    position: relative;
+    margin-top: 4rem;
+    height: 9rem;
+    width: 100%;
+    left: 0;
+    background-color: transparent;
+}
+#welcomename{
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
+    font-size: 4rem;
+    font-family: itim;
+    font-weight: bold;
+    color:#4b464b;
+}
+
+#navigatonBar {
+    position: absolute;
+    top: 1rem;
+    bottom: 1rem;
+    right:0;
+    width: 70%;
+    height: 7rem;
+    background-image: linear-gradient(to right, #6060d8, #949af2);
+    border-top-left-radius: 2.3rem;
+    border-bottom-left-radius: 2.5rem;
+    box-shadow: 0 -0.2rem 1rem rgba(0, 0, 0, 0.5);
+}
+
+/* #navigationDiv {
+    margin-top: 1.8rem;
+} */
+
+#home,
+#Wishlist,
+#Profile,
+#Logout {
+    display: inline-block;
+    height: 100%;
+    margin-top: 2rem;
+    font-size: 2.2rem;
+    margin-left: 7.5rem;
+    margin-right: 7.5rem;
+    color: white;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#home{
+    position: absolute;
+    left: 3rem;
+    top: 0rem;
+    transition: 0.3s;
+}
+#Wishlist{
+    position: absolute;
+    left: 25rem;
+    top: 0rem;
+    transition: 0.3s;
+}
+#Profile{
+    position: absolute;
+    left: 47rem;
+    top: 0rem;
+    transition: 0.3s;
+}
+#Logout{
+    position: absolute;
+    left: 69rem;
+    top: 0rem;
+    transition: 0.3s;
+}
+
+#home:hover{
+    font-size: 2.8rem;
+    top: -0.5rem;
+    left: 2rem;
+    margin-left: 7.1rem;
+    margin-right: 7.1rem;
+}
+#Wishlist:hover{
+    font-size: 2.8rem;
+    top: -0.5rem;
+    left:23rem;
+}
+#Profile:hover{
+    font-size: 2.8rem;
+    top: -0.5rem;
+    left: 45rem;
+}
+#Logout:hover{
+    font-size: 2.8rem;
+    top: -0.5rem;
+    left: 67rem;
+}
+#logout:link,
+#logout:visited,
+#logout:hover,
+#logout:active{
+    text-decoration: none;
+    color: white;
+}
+#profile:link,
+#profile:visited,
+#profile:hover,
+#profile:active{
+    text-decoration: none;
+    color: white;
+}
+#textArea{
+    border: 1px solid red;
+    height: 50rem;
+}
+#bookInfo{
+    float: left;
+    margin-left: .2rem;
+    height: 49rem;
+    width: 52%;
+    border: 1px solid blue;
+}
+#confirmation{
+    float: right;
+    height: 49rem;
+    width: 47.5%;
+    border: 1px solid blue;
+}
+#bookname{
+    font-size: 5rem;
+    padding: 2rem;
+    font-family: itim;
+    cursor: default;
+    transition: 0.5s;
+    text-align: center;
+}
+#bookname:hover{
+    color: #03C04A;
+}
+#bookAuthor{
+    padding: 2rem;
+    font-size: 3rem;
+    text-align: center;
+}
+#description{
+    padding: 2rem;
+    font-size:2rem ;
+}

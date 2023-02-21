@@ -1,5 +1,5 @@
 <?php
-    include("connection.php");
+    include("connection/connection.php");
     session_start();
     if(empty($_SESSION['id'])){
         header("location:index.php");
@@ -13,23 +13,48 @@
 
     $query2="SELECT * FROM `book_info` ORDER BY `Id`";
     $result2=mysqli_query($connection,$query2);
+    if(isset($_REQUEST['mode1'])){
+        $bookid1=$_REQUEST['mode1'];
+        $query3="SELECT * FROM `book_info` WHERE `Id`='$bookid1' ";
+        $result3= mysqli_query($connection,$query3);
+        $rowarr3=mysqli_fetch_array($result3);
+        $bookQuantity=$rowarr3['AVL book'];
+        header("location:confirmedPage.php?bookid=$bookid1&quantity=$bookQuantity");
+    }
 
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Welcome <?php echo $name;?></title>
-        <link href="css-homepage.css" rel="stylesheet">
+        <link href="css/css-homepage.css" rel="stylesheet">
     </head>
     <body>
-        <script src=""></script>
+        <script src="js/scroll.js" defer>
+            // function hehe(){
+            //     var navBar= document.getElementById("navigatonBAr");
+            //     navBar.classList.add("hello");
+            // }
+            // window.onscroll=function() {hehe()};
+            // var navBar=document.getElementById("navigatonBAr");
+            // var sticky=navBar.offsetTop;
+            // function hehe(){
+            //     if(window.pageYOffset>sticky){
+            //         navBar.classList.add("sticky");
+            //     }
+            //     else{
+            //         navBar.classList.remove("sticky");
+            //     }
+            // }
+        </script>
         <div class="bgImage" id="bgImage"></div>
         <div id="supermainDiv">
             <div class="maindiv" id="mainDiv">
+                <div class="scrollToggle"></div>
                 <div class="logo" id="logo">
                     <div id="welcomename">Hello, <?php echo $name;?></div>
                     <div class="navigationBar" id="navigatonBAr">
-                            <div id="home">Home</div>
+                            <div id="home"><a href="#scrollToggle" id="profile">Home</a></div>
                             <div id="Wishlist">Wishlist</div>
                             <div id="Profile"><a href="" id="profile">Profile</a></div>
                             <div id="Logout"><a href="logout.php" id="logout">Logout</a></div>
@@ -73,21 +98,74 @@
                             <td><?php echo $rowarr2['Book name'];?></td>
                             <td><?php echo $rowarr2['Author'];?></td>
                             <td><?php echo $rowarr2['AVL book'];?></td>
-                            <td><a  id="booknow"href="bookInfo.php?bookid=<?php echo $rowarr2['BOOK id']?>">Book Now</a></td>
+                            <td><a  name="value1" id="booknow" onclick='callConfirm("<?php echo  $rowarr2["Book name"]; ?>","<?php echo $rowarr2["Id"];?>","<?php echo $rowarr2["AVL book"];?>")' value="">Book Now</a></td>
                             <td id=checkboxDiv>
                                 <label class="container">
+                                    <input type="hidden" name="name1" value="<?php echo $rowarr2['Id'];?>">
                                     <input type="checkbox" value="checked" name="wishlist-box" id="checkbox">
                                     <div class="checkmark"></div>
                                 </label>
                             </td>
                         </tr>
+                        
+                        <!-- <tr class="invisible">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="confirmation"><div id="buttons">
+                                <form action="" class="buttons">
+                                    <input type="hidden" name="mode1">
+                                    <input type="submit" value="Confirm">
+                                </form>
+                                <form action="" class="buttons">
+                                    <input type="hidden" name="mode2">
+                                    <input type="submit" value="cancel">
+                                </form>
+                            </div></td>
+                            <td></td>
+                        </tr> -->
+                        
                         <?php
                         }
                         ?>
+                        
                     </table>
+                    <div class="confirmation">
+                        <div class="confirmationtext">Do you want to purchase</div>
+                        <div class="bookName"></div>
+                        <div class="buttonDiv">
+                            <form action="" class="buttonDiv1" method="post">
+                                <input type="hidden" name="mode1" value="" id="id1">
+                                <!-- <input type="hidden" name="quantityPassing" value="" id="id2"> -->
+                                <input type="submit" value="Confirm" id="confirmButton">
+                            </form>
+                            <form action="" class="buttonDiv2" onsubmit="return false">
+                                <input type="hidden" name="mode2" value="1">
+                                <input type="button" value="Cancel" id="cancelButton" onclick="cancelled()">
+                            </form>
+                        </div>
+                    </div>
+                    <script>
+                        function callConfirm(name1,id1,quantity1){
+                            const div =document.querySelector(".confirmation");
+                            const name=document.querySelector(".bookName");
+                            const bookid= document.querySelector("#id1");
+                            // const  quantity=document.querySelector("#id2");
+                            bookid.value=id1;
+                            // quantity.value=quantity1;
+
+                            name.innerHTML=name1+" ?";
+                            div.classList.add("slide-in-fwd-center");
+                            }
+                        function cancelled(){
+                            const div =document.querySelector(".confirmation");
+                            div.classList.remove("slide-in-fwd-center");
+                        }
+                    </script>
                 </div>
             </div>
         </div>
+        
         
     </body>
 </html>

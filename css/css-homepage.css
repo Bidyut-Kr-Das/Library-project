@@ -66,8 +66,12 @@ body {
     font-weight: bold;
     color:#4b464b;
 }
-
-#navigatonBAr {
+.scrollToggle{
+    position: absolute;
+    width: 100%;
+    height: 2.5rem;
+}
+.navigationBar {
     position: absolute;
     top: 1rem;
     bottom: 1rem;
@@ -78,6 +82,14 @@ body {
     border-top-left-radius: 2.3rem;
     border-bottom-left-radius: 2.5rem;
     box-shadow: 0 -0.2rem 1rem rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+.sticky{
+    position: fixed;
+    top: 1rem;
+    right: 2.6rem;
+    width: 66.5%;
+    height: 7rem;
 }
 
 /* #navigationDiv {
@@ -363,4 +375,103 @@ td{
 #booknow:hover{
     font-weight: bold;
     color: #03C04A;
+    cursor: pointer;
 }
+.confirmation{
+    text-align: center;
+    opacity: 0;
+    position: fixed;
+    top: 30%;
+    left: 35%;
+    border-radius: 2rem;
+    height: 30rem;
+    width: 50rem;
+    border: 0.1rem solid rgba(0, 0, 0, 0.5);
+    background-color: rgba(255,255,255,0.9);
+    box-shadow: 0.5rem 0.5rem 1rem rgba(0,0,0,0.5);
+}
+/* .visible{
+    visibility: visible;
+} */
+.slide-in-fwd-center {
+	-webkit-animation: slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) forwards;
+	        animation: slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) forwards;
+}
+@-webkit-keyframes slide-in-fwd-center {
+    0% {
+      -webkit-transform: translateZ(-1400px);
+              transform: translateZ(-1400px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-fwd-center {
+    0% {
+      -webkit-transform: translateZ(-1400px);
+              transform: translateZ(-1400px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+.confirmationtext{
+    margin-top: 4rem;
+    font-size: 3rem;
+    font-weight: bold;
+}
+.bookName{
+    margin-top: 3rem;
+    font-size: 3rem;
+    font-family: itim;
+}
+.buttonDiv{
+    margin-top: 4rem;
+}
+.buttonDiv1,.buttonDiv2{
+    display: inline;
+    margin-top: 5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    height: 4rem;
+    width: 16rem;
+    top: 4rem;
+}
+#confirmButton,#cancelButton{
+    border-radius: 4rem;
+    height: 4rem;
+    width: 12rem;
+}
+#confirmButton{
+    background-color: transparent;
+    border: .4rem solid #03C04A;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #03C04A;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#confirmButton:hover{
+    background-color: #03C04A;
+    color: white;
+}
+#cancelButton{
+    background-color: transparent;
+    border: .4rem solid #E3242B;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #E3242B;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#cancelButton:hover{
+    background-color: #E3242B;
+    color: white;
+}
+  

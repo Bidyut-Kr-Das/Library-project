@@ -1,5 +1,5 @@
 <?php
-    include("connection.php");
+    include("connection/connection.php");
     $errormsg="";
     $wrongPass="";
     if(isset($_REQUEST['mode'])){
@@ -33,7 +33,7 @@
 
 <head>
     <title>Login to your account</title>
-    <link href="css-LibraryLogin.css" rel="stylesheet">
+    <link href="css/css-LibraryLogin.css" rel="stylesheet">
 </head>
 
 <body>

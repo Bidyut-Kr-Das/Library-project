@@ -1,5 +1,5 @@
 <?php
-    include("connection.php");
+    include("connection/connection.php");
     $check="";
     
     $phoneNumberTaken="";
@@ -70,7 +70,7 @@
 <html>
     <head>
         <title>Create account</title>
-        <link href="css-LibrarySignup.css" rel="stylesheet">
+        <link href="css/css-LibrarySignup.css" rel="stylesheet">
     </head>
     <body>
         <script src=""></script>

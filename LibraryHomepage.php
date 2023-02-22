@@ -98,7 +98,9 @@
                             <td><?php echo $rowarr2['Book name'];?></td>
                             <td><?php echo $rowarr2['Author'];?></td>
                             <td><?php echo $rowarr2['AVL book'];?></td>
-                            <td><a  name="value1" id="booknow" onclick='callConfirm("<?php echo  $rowarr2["Book name"]; ?>","<?php echo $rowarr2["Id"];?>","<?php echo $rowarr2["AVL book"];?>")' value="">Book Now</a></td>
+                        <?php $x=$rowarr2['Book name'];
+                        $y= $rowarr2['Id'] ?>
+                            <td><a  name="value1" id="booknow" onclick="callConfirm(`<?php echo $x;?>`,`<?php echo $y;?>`)"  value=""   >Book Now</a></td>
                             <td id=checkboxDiv>
                                 <label class="container">
                                     <input type="hidden" name="name1" value="<?php echo $rowarr2['Id'];?>">
@@ -146,7 +148,8 @@
                         </div>
                     </div>
                     <script>
-                        function callConfirm(name1,id1,quantity1){
+                        function callConfirm(name1,id1){
+                            // alert("hello");
                             const div =document.querySelector(".confirmation");
                             const name=document.querySelector(".bookName");
                             const bookid= document.querySelector("#id1");

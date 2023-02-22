@@ -11,8 +11,17 @@
     $rowarr1=mysqli_fetch_array($result1);
     $name=$rowarr1['Firstname'];
 
-    $query2="SELECT * FROM `book_info` ORDER BY `Id`";
-    $result2=mysqli_query($connection,$query2);
+    $searching="";
+    if(isset($_REQUEST['search'])){
+        $searching=$_REQUEST['search'];
+        $query2="SELECT * FROM `book_info` WHERE `Book name` LIKE '%$searching%' OR `BOOK id` LIKE '%$searching%' ";
+        $result2=mysqli_query($connection,$query2);
+    }
+    else{
+        $query2="SELECT * FROM `book_info` ORDER BY `Id`";
+        $result2=mysqli_query($connection,$query2);
+    }
+
     if(isset($_REQUEST['mode1'])){
         $bookid1=$_REQUEST['mode1'];
         $query3="SELECT * FROM `book_info` WHERE `Id`='$bookid1' ";
@@ -60,8 +69,8 @@
                             <div id="Profile"><a href="" id="profile">Profile</a></div>
                             <div id="Logout"><a href="logout.php" id="logout">Logout</a></div>
                             <div id="searchBar">
-                                <input type="text" name="" id="SearchBox" placeholder="Search Book">
-                                <div class="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                <input type="text" name="" id="SearchBox" placeholder="Search Book" value="<?php echo $searching;?>">
+                                <div class="searchIcon" onclick="searchBook()"><i class="fa-solid fa-magnifying-glass"></i></div>
                             </div>
                     </div>
                 </div>
@@ -88,6 +97,17 @@
                 </svg>
                 <div id="secondDivbgImage">
                     <table>
+                    <?php 
+                    // $rowarr4=mysqli_fetch_array($result2);
+                    if(mysqli_num_rows($result2)==0){
+                        ?>
+                        <th id="noBook" rowspan="4">No Book was found with keyword "<?php echo $searching;?>"</th>
+                    <?php
+                    }
+                    else{
+
+                        
+                        ?>
                         <tr>
                             <th>Book name</th>
                             <th>Author</th>
@@ -103,7 +123,7 @@
                             <td><?php echo $rowarr2['Book name'];?></td>
                             <td><?php echo $rowarr2['Author'];?></td>
                             <td><?php echo $rowarr2['AVL book'];?></td>
-                        <?php $x=$rowarr2['Book name'];
+                            <?php $x=$rowarr2['Book name'];
                         $y= $rowarr2['Id'] ?>
                             <td><a  name="value1" id="booknow" onclick="callConfirm(`<?php echo $x;?>`,`<?php echo $y;?>`)"  value=""   >Book Now</a></td>
                             <td id=checkboxDiv>
@@ -134,6 +154,7 @@
                         
                         <?php
                         }
+                    }
                         ?>
                         
                     </table>
@@ -168,6 +189,11 @@
                         function cancelled(){
                             const div =document.querySelector(".confirmation");
                             div.classList.remove("slide-in-fwd-center");
+                        
+                        }
+                        function searchBook(){
+                            let searchedBook=document.querySelector("#SearchBox").value;
+                            window.location.href="LibraryHomepage.php?search="+searchedBook+"&#secondDivbgImage";
                         }
                     </script>
                 </div>

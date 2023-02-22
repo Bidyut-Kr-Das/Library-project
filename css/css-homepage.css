@@ -83,6 +83,9 @@ body {
     border-bottom-left-radius: 2.5rem;
     box-shadow: 0 -0.2rem 1rem rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    /* padding-left: 4rem; */
 }
 .sticky{
     position: fixed;
@@ -95,8 +98,64 @@ body {
 /* #navigationDiv {
     margin-top: 1.8rem;
 } */
-
+#home{
+    margin-left: 7rem;
+}
 #home,
+#Wishlist,
+#Profile,
+#Logout{
+    font-size: 2.2rem;
+    color: white;
+    margin-top: 1.6rem;
+    transition: 0.3s;
+    cursor: pointer;
+}
+#searchBar{
+    margin-top: 1.7rem;
+    margin-right: 3rem;
+    display: flex;
+    justify-content: space-between;
+
+}
+#SearchBox{
+    height: 3rem;
+    width: 21rem;
+    border-radius: 2rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 1.6rem;
+    letter-spacing: 0.3rem;
+    padding-left: 1.8rem;
+    box-sizing: border-box;
+    border: none;
+    transition: 0.5s;
+}
+#SearchBox::placeholder{
+    font-size: 1.4rem;
+    /* padding-left: 1rem; */
+    letter-spacing: normal;
+}
+#SearchBox:focus{
+    border: none;
+    outline: .3rem solid #03C04A;
+}
+.searchIcon{
+    height: 3rem;
+    width: 4rem;
+    font-size: 1.8rem;
+    background-color: white;
+    color: #6060d8;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding-left: 1rem;
+}
+
+
+
+/* #home,
 #Wishlist,
 #Profile,
 #Logout {
@@ -104,11 +163,16 @@ body {
     height: 100%;
     margin-top: 2rem;
     font-size: 2.2rem;
-    margin-left: 7.5rem;
-    margin-right: 7.5rem;
+    margin-left: 3.5rem;
+    /* margin-right: 2.5rem; 
     color: white;
     transition: 0.5s;
     cursor: pointer;
+}
+#searchBar{
+    float: right;
+    /* width: 2rem; 
+
 }
 #home{
     position: absolute;
@@ -118,29 +182,29 @@ body {
 }
 #Wishlist{
     position: absolute;
-    left: 25rem;
+    left: 19rem;
     top: 0rem;
     transition: 0.3s;
 }
 #Profile{
     position: absolute;
-    left: 47rem;
+    left: 41rem;
     top: 0rem;
     transition: 0.3s;
 }
 #Logout{
     position: absolute;
-    left: 69rem;
+    left: 63rem;
     top: 0rem;
     transition: 0.3s;
-}
+} */
 
 #home:hover{
     font-size: 2.8rem;
     top: -0.5rem;
     left: 2rem;
-    margin-left: 7.1rem;
-    margin-right: 7.1rem;
+    margin-left: 6.1rem;
+    /* margin-right: 1.1rem; */
 }
 #Wishlist:hover{
     font-size: 2.8rem;
@@ -378,6 +442,7 @@ td{
     cursor: pointer;
 }
 .confirmation{
+    color: white;
     text-align: center;
     opacity: 0;
     position: fixed;
@@ -386,8 +451,8 @@ td{
     border-radius: 2rem;
     height: 30rem;
     width: 50rem;
-    border: 0.1rem solid rgba(0, 0, 0, 0.5);
-    background-color: rgba(255,255,255,0.9);
+    border: 0.1rem solid rgba(255,255,255, 0.9);
+    background-color: rgba(0,0,0,0.8);
     box-shadow: 0.5rem 0.5rem 1rem rgba(0,0,0,0.5);
 }
 /* .visible{

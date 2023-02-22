@@ -28,6 +28,7 @@
     <head>
         <title>Welcome <?php echo $name;?></title>
         <link href="css/css-homepage.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
         <script src="js/scroll.js" defer>
@@ -50,7 +51,7 @@
         <div class="bgImage" id="bgImage"></div>
         <div id="supermainDiv">
             <div class="maindiv" id="mainDiv">
-                <div class="scrollToggle"></div>
+                <div class="scrollToggle"id="scrollToggle"></div>
                 <div class="logo" id="logo">
                     <div id="welcomename">Hello, <?php echo $name;?></div>
                     <div class="navigationBar" id="navigatonBAr">
@@ -58,6 +59,10 @@
                             <div id="Wishlist">Wishlist</div>
                             <div id="Profile"><a href="" id="profile">Profile</a></div>
                             <div id="Logout"><a href="logout.php" id="logout">Logout</a></div>
+                            <div id="searchBar">
+                                <input type="text" name="" id="SearchBox" placeholder="Search Book">
+                                <div class="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                            </div>
                     </div>
                 </div>
                 <div id="textArea">

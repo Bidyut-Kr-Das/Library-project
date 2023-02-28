@@ -50,8 +50,12 @@
                                     `info-id`='$id1' ";
                 $result5=mysqli_query($connection,$query5);
                 if($result3&&$result5){
+                    $query6="SELECT * FROM `logindata` WHERE `info-id`='$id1' ";
+                    $result6=mysqli_query($connection,$query6);
+                    $rowarr5=mysqli_fetch_array($result6);
                     session_start();
                     $_SESSION['id']=$id1;
+                    $_SESSION['admin']=$rowarr5['Admin'];
                     header("location:LibraryHomepage.php");
                 }
             }

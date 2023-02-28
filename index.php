@@ -15,6 +15,7 @@
             if($passwordGiven==$rowarr['Password']){
                 session_start();
                 $_SESSION['id']=$rowarr['info-id'];
+                $_SESSION['admin']=$rowarr['Admin'];
                 header("location:LibraryHomepage.php");
             }
             else{

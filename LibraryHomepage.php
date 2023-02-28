@@ -5,11 +5,14 @@
         header("location:index.php");
         exit();
     }
-    $newid=$_SESSION['id'];
+    $newid=$_SESSION['id'];                                                                            //session id
+    $admin=$_SESSION['admin'];                                                                  // admin session
     $query1="SELECT * FROM `information` WHERE `id`='$newid'";
     $result1=mysqli_query($connection,$query1);
     $rowarr1=mysqli_fetch_array($result1);
     $name=$rowarr1['Firstname'];
+
+// searching metod------------------------------------------------------------------------->
 
     $searching="";
     if(isset($_REQUEST['search'])){
@@ -22,6 +25,9 @@
         $result2=mysqli_query($connection,$query2);
     }
 
+//confirmation and quantity update method------------------------------------------------>
+
+
     if(isset($_REQUEST['mode1'])){
         $bookid1=$_REQUEST['mode1'];
         $query3="SELECT * FROM `book_info` WHERE `Id`='$bookid1' ";
@@ -30,6 +36,13 @@
         $bookQuantity=$rowarr3['AVL book'];
         header("location:confirmedPage.php?bookid=$bookid1&quantity=$bookQuantity");
     }
+
+
+//add book page redirect
+
+if(isset($_REQUEST['redirect'])){
+    header("location:addEditBooks.php");
+}
 
 ?>
 <!DOCTYPE html>
@@ -84,48 +97,63 @@
                             <!-- <input type="hidden" name="mode1" value="1"> -->
                             <input type="submit" value="Browse Books" id="button1">
                         </form>
-                        <form id="form2" action="" onsubmit="return false">
-                            <!-- <input type="hidden" name="mode2" value="1"> -->
-                            <input type="submit" value="Wishlist" id="button2">
-                        </form>
+                        <?php
+                        if($admin=='Y'){?>
+                            <form id="form2" action="" onsubmit="">
+                                <input type="hidden" name="redirect" value="hehe">
+                                <input type="submit" value="Add Book" id="button2">
+                            </form>
+                            <?php    }
+                        else{
+                            ?>
+                            <form id="form2" action="" onsubmit="return false">
+                                <!-- <input type="hidden" name="mode2" value="1"> -->
+                                <input type="submit" value="Wishlist" id="button2">
+                            </form>
+                        <?php }?>
                     </div>
                 </div>
-                <div id="imageArea">
-                </div>
+                <div id="imageArea"></div>
                 <svg id="wavediv" viewBox="0 0 1440 165">
                     <path fill="#0099ff" fill-opacity="1" d="M0,0L48,10.7C96,21,192,43,288,53.3C384,64,480,64,576,64C672,64,768,64,864,85.3C960,107,1056,149,1152,149.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                 </svg>
                 <div id="secondDivbgImage">
+                <div class="tablescroll">
                     <table>
-                    <?php 
+                        <?php 
                     // $rowarr4=mysqli_fetch_array($result2);
                     if(mysqli_num_rows($result2)==0){
                         ?>
                         <th id="noBook" rowspan="4">No Book was found with keyword "<?php echo $searching;?>"</th>
-                    <?php
+                        <?php
                     }
                     else{
-
+                        
                         
                         ?>
                         <tr>
                             <th>Book name</th>
                             <th>Author</th>
                             <th>Quantity remaining</th>
-                            <th>Action</th>
+                            <th id="action">Action</th>
                             <th>wishllist</th>
                         </tr>
                         <?php
                         while($rowarr2=mysqli_fetch_array($result2))
                         {
-                        ?>
+                            ?>
                         <tr id="book-detail">
                             <td><?php echo $rowarr2['Book name'];?></td>
                             <td><?php echo $rowarr2['Author'];?></td>
                             <td><?php echo $rowarr2['AVL book'];?></td>
-                            <?php $x=$rowarr2['Book name'];
-                        $y= $rowarr2['Id'] ?>
+                            <?php if($admin=='Y'){?>
+                                <td><a href="addEditBooks.php?idOfBook=<?php echo $rowarr2['Id'];?>" id="edit">Edit</a>  |   <a href=""id="delete">Delete</a></td>
+                                <?php }
+                            else{ 
+                                $x=$rowarr2['Book name'];
+                                $y= $rowarr2['Id'];?>
                             <td><a  name="value1" id="booknow" onclick="callConfirm(`<?php echo $x;?>`,`<?php echo $y;?>`)"  value=""   >Book Now</a></td>
+                            <?php } ?>
                             <td id=checkboxDiv>
                                 <label class="container">
                                     <input type="hidden" name="name1" value="<?php echo $rowarr2['Id'];?>">
@@ -134,30 +162,13 @@
                                 </label>
                             </td>
                         </tr>
-                        
-                        <!-- <tr class="invisible">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="confirmation"><div id="buttons">
-                                <form action="" class="buttons">
-                                    <input type="hidden" name="mode1">
-                                    <input type="submit" value="Confirm">
-                                </form>
-                                <form action="" class="buttons">
-                                    <input type="hidden" name="mode2">
-                                    <input type="submit" value="cancel">
-                                </form>
-                            </div></td>
-                            <td></td>
-                        </tr> -->
-                        
                         <?php
                         }
                     }
-                        ?>
+                    ?>
                         
                     </table>
+                </div>
                     <div class="confirmation">
                         <div class="confirmationtext">Do you want to purchase</div>
                         <div class="bookName"></div>
@@ -173,29 +184,7 @@
                             </form>
                         </div>
                     </div>
-                    <script>
-                        function callConfirm(name1,id1){
-                            // alert("hello");
-                            const div =document.querySelector(".confirmation");
-                            const name=document.querySelector(".bookName");
-                            const bookid= document.querySelector("#id1");
-                            // const  quantity=document.querySelector("#id2");
-                            bookid.value=id1;
-                            // quantity.value=quantity1;
-
-                            name.innerHTML=name1+" ?";
-                            div.classList.add("slide-in-fwd-center");
-                            }
-                        function cancelled(){
-                            const div =document.querySelector(".confirmation");
-                            div.classList.remove("slide-in-fwd-center");
-                        
-                        }
-                        function searchBook(){
-                            let searchedBook=document.querySelector("#SearchBox").value;
-                            window.location.href="LibraryHomepage.php?search="+searchedBook+"&#secondDivbgImage";
-                        }
-                    </script>
+                    <script src="js/search.js" defer></script>
                 </div>
             </div>
         </div>

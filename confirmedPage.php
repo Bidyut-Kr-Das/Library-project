@@ -2,6 +2,7 @@
 include("connection/connection.php");
 session_start();
 $id=$_SESSION['id'];
+
 $bookId= $_REQUEST['bookid'];
 $bookQuantity=$_REQUEST['quantity'];
 
@@ -12,7 +13,8 @@ $result1=mysqli_query($connection,$query1);
 
 //reducing the quantity of selected book.----------------------------------------->
 
-$bookQuantity-=1;
+$bookQuantity -= 1 ;
+// $bookQuantity=$bookQuantity-1;
 
 //Query for updating the `book_info` table------------------------------------->
 

@@ -2,12 +2,14 @@
     font-family: poppins;
     src: url(fonts/Poppins-Regular.ttf);
 }
+
 @font-face {
     font-family: itim;
     src: url(fonts/Itim-Regular.ttf);
 }
-:root{
-    --height1:300vh;
+
+:root {
+    --height1: 300vh;
 }
 
 html {
@@ -28,9 +30,20 @@ body {
     height: var(--height1);
     width: 100%;
     background-size: cover;
-    background-image: linear-gradient(to top right, #6060d8, #949af2);
+    background-image: linear-gradient(to right, #6060d8, #949af2);
 }
-#supermainDiv{
+
+#borderTop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5rem;
+    width: 100%;
+    background-image: linear-gradient(to right, #6060d8, #949af2);
+    z-index: 100;
+}
+
+#supermainDiv {
     position: absolute;
     top: 5rem;
     left: 5rem;
@@ -46,7 +59,7 @@ body {
     height: 50rem;
     width: 100%;
     background-color: #ffffff;
-    
+
     /* border-radius: 1.8rem; */
 }
 
@@ -58,25 +71,28 @@ body {
     left: 0;
     background-color: transparent;
 }
-#welcomename{
+
+#welcomename {
     position: absolute;
     top: 2rem;
     left: 3rem;
     font-size: 4rem;
     font-family: itim;
     font-weight: bold;
-    color:#4b464b;
+    color: #4b464b;
 }
-.scrollToggle{
+
+.scrollToggle {
     position: absolute;
     width: 100%;
     height: 2.5rem;
 }
+
 .navigationBar {
     position: absolute;
     top: 1rem;
     bottom: 1rem;
-    right:0;
+    right: 0;
     width: 70%;
     height: 7rem;
     background-image: linear-gradient(to right, #6060d8, #949af2);
@@ -88,38 +104,46 @@ body {
     justify-content: space-between;
     /* padding-left: 4rem; */
 }
-.sticky{
+
+.sticky {
     position: fixed;
     top: 1rem;
     right: 2.6rem;
     width: 66.5%;
     height: 7rem;
+    box-shadow: 0.5rem -0.2rem 1rem rgba(0, 0, 0, 0.5);
+    border-left: .2rem solid #ffffff;
+    border-top: .2rem solid #ffffff;
+
 }
 
 /* #navigationDiv {
     margin-top: 1.8rem;
 } */
-#home{
+#home {
     margin-left: 7rem;
 }
+
 #home,
 #Wishlist,
 #Profile,
-#Logout{
+#Logout {
     font-size: 2.2rem;
     color: white;
     margin-top: 1.6rem;
     transition: 0.3s;
     cursor: pointer;
 }
-#searchBar{
+
+#searchBar {
     margin-top: 1.7rem;
     margin-right: 3rem;
     display: flex;
     justify-content: space-between;
 
 }
-#SearchBox{
+
+#SearchBox {
     height: 3rem;
     width: 21rem;
     border-radius: 2rem;
@@ -132,16 +156,19 @@ body {
     border: none;
     transition: 0.5s;
 }
-#SearchBox::placeholder{
+
+#SearchBox::placeholder {
     font-size: 1.4rem;
     /* padding-left: 1rem; */
     letter-spacing: normal;
 }
-#SearchBox:focus{
+
+#SearchBox:focus {
     border: none;
     outline: .3rem solid #03C04A;
 }
-.searchIcon{
+
+.searchIcon {
     height: 3rem;
     width: 4rem;
     font-size: 1.8rem;
@@ -153,57 +180,68 @@ body {
     box-sizing: border-box;
     padding-left: 1rem;
 }
-#home:hover{
+
+#home:hover {
     font-size: 2.8rem;
     top: -0.5rem;
     left: 2rem;
     margin-left: 6.1rem;
     /* margin-right: 1.1rem; */
 }
-#Wishlist:hover{
+
+#Wishlist:hover {
     font-size: 2.8rem;
     top: -0.5rem;
-    left:23rem;
+    left: 23rem;
 }
-#Profile:hover{
+
+#Profile:hover {
     font-size: 2.8rem;
     top: -0.5rem;
     left: 45rem;
 }
-#Logout:hover{
+
+#Logout:hover {
     font-size: 2.8rem;
     top: -0.5rem;
     left: 67rem;
 }
-#textArea{
+
+#textArea {
     /* border: 1px solid red; */
     height: 27rem;
     margin: 3rem;
     width: 65rem;
 }
-#welcomeText{
+
+#welcomeText {
     font-size: 5rem;
     text-align: center;
     font-family: itim;
     pointer-events: none;
     color: #4b464b;
 }
-#welcome{
+
+#welcome {
     font-size: 12rem;
     color: #6060d8;
 }
-#buttonDiv{
+
+#buttonDiv {
     font-family: itim;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 2rem;
 }
-#form1,#form2{
+
+#form1,
+#form2 {
     display: inline;
     margin: 2rem;
 }
-#button1{
+
+#button1 {
     height: 4rem;
     width: 15rem;
     border-radius: 3rem;
@@ -218,7 +256,8 @@ body {
     cursor: pointer;
     box-shadow: .2rem .2rem 1rem rgba(0, 0, 0, 0.5);
 }
-#button2{
+
+#button2 {
     height: 4rem;
     width: 15rem;
     border-radius: 3rem;
@@ -233,32 +272,37 @@ body {
     cursor: pointer;
     box-shadow: .2rem .2rem 1rem rgba(0, 0, 0, 0.5);
 }
-#button1:hover{
+
+#button1:hover {
     background-color: transparent;
     border: .4rem solid #6060d8;
     color: #6060d8;
 }
-#button2:hover{
+
+#button2:hover {
     background-color: #6060d8;
     border: none;
     color: white;
 }
+
 #logout:link,
 #logout:visited,
 #logout:hover,
-#logout:active{
+#logout:active {
     text-decoration: none;
     color: white;
 }
+
 #profile:link,
 #profile:visited,
 #profile:hover,
-#profile:active{
+#profile:active {
     text-decoration: none;
     color: white;
 }
-#imageArea{
-    position:absolute;
+
+#imageArea {
+    position: absolute;
     top: 12rem;
     right: 5rem;
     height: 40rem;
@@ -271,25 +315,27 @@ body {
     z-index: 12;
 }
 
-#wavediv{
+#wavediv {
     margin: 0;
     position: relative;
     background-color: #ffffff;
 }
-#secondDivbgImage{
+
+#secondDivbgImage {
     position: relative;
     box-sizing: border-box;
     padding-top: 12rem;
     top: -1rem;
-    height:100rem ;
+    height: 100rem;
     width: 100%;
-    background-color:#0099ff;
+    background-color: #0099ff;
     margin: 0;
     /* padding-top: 10rem; */
     display: flex;
     /* align-items: center; */
     justify-content: center;
 }
+
 /* Hide the default checkbox */
 .container input {
     position: absolute;
@@ -297,18 +343,18 @@ body {
     cursor: pointer;
     height: 0;
     width: 0;
-   }
-   
-   .container {
+}
+
+.container {
     display: block;
     position: relative;
     cursor: pointer;
     font-size: 20px;
     user-select: none;
-   }
-   
-   /* Create a custom checkbox */
-   .checkmark {
+}
+
+/* Create a custom checkbox */
+.checkmark {
     position: relative;
     top: 0;
     left: 0;
@@ -317,29 +363,29 @@ body {
     background-color: #ccc;
     transition: all 0.3s;
     border-radius: 5px;
-   }
-   
-   /* When the checkbox is checked, add a blue background */
-   .container input:checked ~ .checkmark {
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked~.checkmark {
     background-color: #47da99;
     animation: pop 0.5s;
     animation-direction: alternate;
-   }
-   
-   /* Create the checkmark/indicator (hidden when not checked) */
-   .checkmark:after {
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
     content: "";
     position: absolute;
     display: none;
-   }
-   
-   /* Show the checkmark when checked */
-   .container input:checked ~ .checkmark:after {
+}
+
+/* Show the checkmark when checked */
+.container input:checked~.checkmark:after {
     display: block;
-   }
-   
-   /* Style the checkmark/indicator */
-   .container .checkmark:after {
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
     left: 0.45em;
     top: 0.25em;
     width: 0.25em;
@@ -347,55 +393,77 @@ body {
     border: solid white;
     border-width: 0 0.15em 0.15em 0;
     transform: rotate(45deg);
-   }
-   
-   @keyframes pop {
+}
+
+@keyframes pop {
     0% {
-     transform: scale(1);
+        transform: scale(1);
     }
-   
+
     50% {
-     transform: scale(0.5);
+        transform: scale(0.5);
     }
-   
+
     100% {
-     transform: scale(1);
+        transform: scale(1);
     }
-   }
-.tablescroll{
+}
+
+.tablescroll {
     overflow-y: auto;
     width: 100%;
     height: 60rem;
 }
-.tablescroll::-webkit-scrollbar{
+
+.tablescroll::-webkit-scrollbar {
     width: 1.5rem;
 }
-.tablescroll::-webkit-scrollbar-track{
-    background-color: rgba(255,255,255,0.3);
-    border-top-right-radius:1rem ;
-    border-bottom-right-radius:1rem ;
+
+.tablescroll::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
 }
-.tablescroll::-webkit-scrollbar-thumb{
+
+.tablescroll::-webkit-scrollbar-thumb {
     width: 0.5rem;
     background-color: #2F58CD;
-    border:.3rem solid rgba(255,255,255,0.3);
+    border: .3rem solid rgba(255, 255, 255, 0.3);
     border-radius: 100vw;
 }
-body::-webkit-scrollbar{
+
+.tablescroll::-webkit-scrollbar-thumb:active {
+    width: 0.5rem;
+    background-color: #2F58CD;
+    border: .3rem solid #ffffff;
+    border-radius: 100vw;
+}
+
+body::-webkit-scrollbar {
     width: 1.5rem;
 }
-body::-webkit-scrollbar-track{
+
+body::-webkit-scrollbar-track {
     background-color: #949af2;
     border-radius: 100vw;
     margin-block: .3rem;
 }
-body::-webkit-scrollbar-thumb{
+
+body::-webkit-scrollbar-thumb {
     width: 0.5rem;
     background-color: #6060d8;
-    border:.3rem solid white;
+    border: .3rem solid white;
     border-radius: 100vw;
 }
-table{
+
+body::-webkit-scrollbar-thumb:active {
+    width: 0.5rem;
+    background-color: #0099ff;
+    border: .3rem solid white;
+    border-radius: 100vw;
+}
+
+table {
     /* height: 100%; */
     width: 100%;
     /* margin-left: 5rem;
@@ -403,125 +471,184 @@ table{
     border-spacing: 0 2rem;
     border-collapse: separate;
     border-radius: 1rem;
-    border-top-right-radius:0 ;
-    border-bottom-right-radius:0 ;
-    background-color: rgba(255,255,255,0.3);
-    box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.5) ;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.5);
     padding-left: 2rem;
     padding-right: 2rem;
     font-size: 1.8rem;
-    font-weight: bold;    
+    font-weight: bold;
 }
-th{
+
+th {
     text-align: left;
-    padding-left:1rem;
+    padding-left: 1rem;
     box-shadow: none;
 }
-td{
-    padding-left:1rem;
+
+td {
+    box-sizing: border-box;
+    padding-left: 1rem;
 }
+
+#action {
+    padding-left: 4rem;
+}
+
 /* td:nth-child(even){
     background-color: #B2B2B2;
 }    */
-#book-detail{
+#book-detail {
     height: 6rem;
     width: 100%;
     background-color: white;
     border: 1px solid white;
     box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.5);
 }
+
 #edit:link,
 #edit:active,
 #edit:visited,
 #delete:link,
 #delete:active,
-#delete:visited
-{
+#delete:visited {
     color: #4b464b;
 }
-#edit:hover
-{
-    color:#2F58CD;
-    transform: scale(2.02);
+
+#return,
+#renew {
+    cursor: grab;
+    transition: 0.3s;
 }
-#delete:hover{
+
+#return:link,
+#return:active,
+#return:visited,
+#renew:link,
+#renew:active,
+#renew:visited {
+    color: #4b464b;
+    text-decoration: none;
+}
+
+#edit:hover {
+    color: #2F58CD;
+    font-size: 1.9rem;
+}
+
+#delete:hover {
     color: #E3242B;
 }
-#checkboxDiv{
+
+#return:hover {
+    color: #E3242B;
+    font-size: 2rem;
+}
+
+#renew:hover {
+    color: #2F58CD;
+    font-size: 2rem;
+
+}
+
+#checkboxDiv {
     position: relative;
     padding-left: 2rem;
 }
 
 #booknow:link,
 #booknow:active,
-#booknow:visited{
+#booknow:visited {
     text-decoration: none;
     color: #4b464b;
 }
-#booknow:hover{
+
+#booknow:hover {
     font-weight: bold;
     color: #03C04A;
     cursor: pointer;
 }
-.confirmation{
+
+.confirmation {
     color: white;
     text-align: center;
-    opacity: 0;
     position: fixed;
+    /* visibility: hidden; */
     top: 30%;
     left: 35%;
     border-radius: 2rem;
     height: 30rem;
     width: 50rem;
-    border: 0.1rem solid rgba(255,255,255, 0.9);
-    background-color: rgba(0,0,0,0.8);
-    box-shadow: 0.5rem 0.5rem 1rem rgba(0,0,0,0.5);
+    border: 0.1rem solid rgba(255, 255, 255, 0.9);
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 }
-/* .visible{
+
+.visible {
     visibility: visible;
-} */
-.slide-in-fwd-center {
-	-webkit-animation: slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) forwards;
-	        animation: slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) forwards;
 }
+
+.slide-in-fwd-center {
+    -webkit-animation: slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) forwards;
+    animation: slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) forwards;
+}
+
 @-webkit-keyframes slide-in-fwd-center {
     0% {
-      -webkit-transform: translateZ(-1400px);
-              transform: translateZ(-1400px);
-      opacity: 0;
+        -webkit-transform: translateZ(-1400px);
+        transform: translateZ(-1400px);
+        /* opacity: 0; */
     }
+
     100% {
-      -webkit-transform: translateZ(0);
-              transform: translateZ(0);
-      opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        /* opacity: 1; */
     }
-  }
-  @keyframes slide-in-fwd-center {
+}
+
+@keyframes slide-in-fwd-center {
     0% {
-      -webkit-transform: translateZ(-1400px);
-              transform: translateZ(-1400px);
-      opacity: 0;
+        -webkit-transform: translateZ(-1400px);
+        transform: translateZ(-1400px);
+        /* opacity: 0; */
     }
+
     100% {
-      -webkit-transform: translateZ(0);
-              transform: translateZ(0);
-      opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        /* opacity: 1; */
     }
-  }
-.confirmationtext{
+}
+
+.confirmationtext {
     margin-top: 4rem;
     font-size: 3rem;
     font-weight: bold;
 }
-.bookName{
+
+.bookName {
     margin-top: 3rem;
     font-size: 3rem;
     font-family: itim;
 }
-.buttonDiv{
+
+.buttonDiv {
     margin-top: 4rem;
 }
-.buttonDiv1,.buttonDiv2{
+
+.h1 {
+    visibility: hidden;
+}
+
+.inputhiddenVisible {
+    visibility: visible;
+}
+
+.buttonDiv1,
+.buttonDiv2 {
     display: inline;
     margin-top: 5rem;
     margin-left: 2rem;
@@ -530,12 +657,15 @@ td{
     width: 16rem;
     top: 4rem;
 }
-#confirmButton,#cancelButton{
+
+#confirmButton,
+#cancelButton {
     border-radius: 4rem;
     height: 4rem;
     width: 12rem;
 }
-#confirmButton{
+
+#confirmButton {
     background-color: transparent;
     border: .4rem solid #03C04A;
     font-size: 1.8rem;
@@ -544,11 +674,13 @@ td{
     transition: 0.5s;
     cursor: pointer;
 }
-#confirmButton:hover{
+
+#confirmButton:hover {
     background-color: #03C04A;
     color: white;
 }
-#cancelButton{
+
+#cancelButton {
     background-color: transparent;
     border: .4rem solid #E3242B;
     font-size: 1.8rem;
@@ -557,11 +689,13 @@ td{
     transition: 0.5s;
     cursor: pointer;
 }
-#cancelButton:hover{
+
+#cancelButton:hover {
     background-color: #E3242B;
     color: white;
 }
-#noBook{
+
+#noBook {
     height: 6rem;
     width: 100%;
     background-color: white;
@@ -572,4 +706,130 @@ td{
     font-size: 3.5rem;
     font-weight: bold;
 }
+
+.returnConfirmation {
+    /* visibility: hidden; */
+    color: white;
+    text-align: center;
+    position: fixed;
+    top: 30%;
+    left: 35%;
+    border-radius: 2rem;
+    height: 30rem;
+    width: 50rem;
+    border: 0.1rem solid rgba(255, 255, 255, 0.9);
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.confirmationtext1 {
+    margin-top: 4rem;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.bookName1 {
+    margin-top: 3rem;
+    font-size: 3rem;
+    font-family: itim;
+}
+
+.buttonDivReturn {
+    margin-top: 4rem;
+}
+
+.h1 {
+    visibility: hidden;
+}
+
+.inputhiddenVisible {
+    visibility: visible;
+}
+
+#confirmButton1,
+#cancelButton1 {
+    border-radius: 4rem;
+    height: 4rem;
+    width: 12rem;
+}
+
+#confirmButton1 {
+    background-color: transparent;
+    border: .4rem solid #03C04A;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #03C04A;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+#confirmButton1:hover {
+    background-color: #03C04A;
+    color: white;
+}
+
+#cancelButton1 {
+    background-color: transparent;
+    border: .4rem solid #E3242B;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #E3242B;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+#cancelButton1:hover {
+    background-color: #E3242B;
+    color: white;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+#snackbar {
+    visibility: hidden;
+    width: 35rem;
+    height: 4rem;
+    /* min-width: 250px; */
+    /* margin-left: -125px; */
+    background-color: #4D455D;
+    color: #FFB84C;
+    text-align: center;
+    border-radius: .2rem;
+    padding: 1rem;
+    position: fixed;
+    z-index: 1;
+    border: .3rem solid #FFB84C;
+    /* left: 50%; */
+    bottom: 4rem;
+    font-size: 2.5rem;
+    font-family: itim;
+  }
   
+  #snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 4rem; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 4rem; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 4rem; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 4rem; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }

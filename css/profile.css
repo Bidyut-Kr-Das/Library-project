@@ -1,0 +1,130 @@
+@font-face {
+    font-family: poppins;
+    src: url(../fonts/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: itim;
+    src: url(../fonts/Itim-Regular.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: poppins;
+    scroll-behavior: smooth;
+    overflow-y: hidden;
+}
+
+.bgImage {
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(to top right, #86A3B8, #E8D2A6, #F55050);
+
+}
+
+.mainDiv {
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    /* border: 1px solid black; */
+    width: 93%;
+    height: 93%;
+}
+
+.marginMainDiv {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    /* border: 1px solid blue; */
+}
+
+.profileDiv {
+    position: absolute;
+    height: 100%;
+    width: 45rem;
+    /* border: 1px solid red; */
+    background-color: white;
+    box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, .5);
+    border-radius: .5rem;
+}
+
+.marginSecondDiv {
+    position: relative;
+    margin-left: 48rem;
+    /* border: 1px solid red; */
+    height: 100%;
+
+}
+
+.userInfoDiv {
+    border: 1px solid black;
+    height: 48%;
+    width: 100%;
+    box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, .5);
+    background-color: white;
+    border-radius: .5rem;
+}
+
+.BookDateDiv {
+    border: 1px solid white;
+    margin-top: 2%;
+    height: 48%;
+    width: 100%;
+    box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, .5);
+    background-color: white;
+    border-radius: .5rem;
+}
+
+.nameDiv1 {
+    box-sizing: border-box;
+    width: 100%;
+    height: 10rem;
+    padding-top: 4rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.subnameDiv {
+    font-size: 1.7rem;
+    width: 28rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+#Fname,
+#Mname,
+#Lname{
+    font-size: 1.5rem;
+    height: 2.7rem;
+    width: 100%;
+}
+.nameDiv2 {
+    box-sizing: border-box;
+    width: 100%;
+    height: 10rem;
+    padding-top: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+.subnameDiv2 {
+    font-size: 1.7rem;
+    width: 42rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+#Email,#Mobile{
+    font-size: 1.5rem;
+    height: 2.7rem;
+    width: 100%;
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2023 at 04:28 PM
+-- Generation Time: Mar 01, 2023 at 04:35 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -30,8 +30,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `bookstaken` (
   `id` int(11) NOT NULL,
   `student-id` int(11) NOT NULL,
-  `book-id` varchar(256) NOT NULL
+  `BookId` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bookstaken`
+--
+
+INSERT INTO `bookstaken` (`id`, `student-id`, `BookId`) VALUES
+(58, 19, '1'),
+(60, 19, '4'),
+(61, 19, '1'),
+(62, 19, '1'),
+(63, 19, '2'),
+(64, 19, '3'),
+(65, 19, '12');
 
 -- --------------------------------------------------------
 
@@ -43,6 +56,7 @@ CREATE TABLE `book_info` (
   `Id` int(11) NOT NULL,
   `Book name` varchar(256) NOT NULL,
   `Author` varchar(256) NOT NULL DEFAULT '*CONTROVERTIAL',
+  `description` varchar(500) NOT NULL DEFAULT 'Not provided',
   `BOOK id` varchar(256) NOT NULL,
   `AVL book` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -51,17 +65,18 @@ CREATE TABLE `book_info` (
 -- Dumping data for table `book_info`
 --
 
-INSERT INTO `book_info` (`Id`, `Book name`, `Author`, `BOOK id`, `AVL book`) VALUES
-(1, 'THE POWER OF MYTH', 'Joseph Campbell', 'TPOM0001', 678),
-(2, 'THE RAGER\'S EDGE ', 'Somerset maugham', 'TRE00012', 1000),
-(3, 'CATCHER IN THE RYE', 'JD Salinger', 'CITE0098', 500),
-(4, 'RUMI', '*CONTROVERTIAL', 'RUMI1236', 900),
-(5, 'AUTOBIOGRAPHY OF A YOGI', 'Paramahansa yogananda', 'AOY76890', 450),
-(6, 'MAN\'S SEARCH FOR MEANING', 'Vectior E ', 'MSFM9876', 800),
-(7, 'THE LITTLE PRINCE', 'Antonie de Saint-Exupery', 'TLP0110\r\n', 980),
-(8, 'THE BHAGAVAD GITA ', 'Sanjoy', 'TBG9854', 780),
-(9, 'NINE lives ', 'William Dalrymple', 'NL1278', 899),
-(10, 'YOGA OF HEART ', 'Mark Whitwell', 'YOH7689', 760);
+INSERT INTO `book_info` (`Id`, `Book name`, `Author`, `description`, `BOOK id`, `AVL book`) VALUES
+(1, 'THE POWER OF MYTH', 'Joseph Campbell', '', 'TPOM0001', 80),
+(2, 'THE RAGER\'S EDGE ', 'Somerset maugham', '', 'TRE00012', 989),
+(3, 'CATCHER IN THE RYE', 'JD Salinger', '', 'CITE0098', 998),
+(4, 'RUMI', '*CONTROVERTIAL', '', 'RUMI1236', 998),
+(5, 'AUTOBIOGRAPHY OF A YOGI', 'Paramahansa yogananda', '', 'AOY76890', 999),
+(6, 'MAN\'S SEARCH FOR MEANING', 'Vectior E ', '', 'MSFM9876', 99),
+(8, 'THE BHAGAVAD GITA ', 'Sanjoy', 'Not provided', 'TBG9854', 780),
+(9, 'NINE lives ', 'William Dalrymple', 'Not provided', 'NL1278', 897),
+(10, 'YOGA OF HEART ', 'Mark Whitwell', 'Not provided', 'YOH7689', 760),
+(11, 'hello\'s book', 'bkd', 'hululu', 'THWA', 300),
+(12, 'new book', 'bidyut', '', 'bhola', 122);
 
 -- --------------------------------------------------------
 
@@ -83,17 +98,10 @@ CREATE TABLE `information` (
 --
 
 INSERT INTO `information` (`id`, `Firstname`, `Middlename`, `last Name`, `phone number`, `EmailId`) VALUES
-(1, 'starting', 'starting', 'starting', '111111111111', ''),
-(9, 'bidyut', 'kr', 'das', '77777', ''),
-(10, 'bidyut', 'kr', 'das', '77777', ''),
-(11, 'kingshuk', '', 'sil', '77777', ''),
-(12, 'gfch', 'hh', 'tghh5', '234556543', ''),
-(13, 'hjnmhkjfhd', 'jhghjg', 'jhgjh', '6374637', ''),
-(14, 'sdgfadf', 'sadfg', 'asdfg', '0', ''),
-(15, 'starting', 'dsafdf', 'adf', '0', ''),
 (16, 'Bidyut', 'Kr  ', 'Das', '6294935776', 'bkdas2017.bd@gmail.com'),
 (17, 'Bidyut', 'Kr. ', 'Das', '6294935777', 'bkdas2017.bd@gmail.com'),
-(18, 'Bidyut', 'kr ', 'das', '9812037498103280', '12345');
+(18, 'Bidyut', 'kr ', 'das', '9812037498103280', '12345'),
+(19, 'user', 'testing ', 'das', '1234567890', 'abcd');
 
 -- --------------------------------------------------------
 
@@ -106,7 +114,7 @@ CREATE TABLE `logindata` (
   `username` varchar(256) NOT NULL,
   `Password` varchar(256) NOT NULL,
   `info-id` int(11) NOT NULL COMMENT 'this is the id of information table to connect both table together',
-  `Admin` varchar(10) NOT NULL
+  `Admin` varchar(10) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -114,9 +122,10 @@ CREATE TABLE `logindata` (
 --
 
 INSERT INTO `logindata` (`ID`, `username`, `Password`, `info-id`, `Admin`) VALUES
-(16, 'Bidyut', '123456', 16, ''),
+(16, 'Bidyut', '123456', 16, 'Y'),
 (17, 'bkdas02', '1234567', 17, ''),
-(18, 'Bidyut@13456', '12345', 18, '');
+(18, 'Bidyut@13456', '12345', 18, ''),
+(19, 'user@123', '123456', 19, 'N');
 
 -- --------------------------------------------------------
 
@@ -191,25 +200,25 @@ ALTER TABLE `tableofbooks`
 -- AUTO_INCREMENT for table `bookstaken`
 --
 ALTER TABLE `bookstaken`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `book_info`
 --
 ALTER TABLE `book_info`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `information`
 --
 ALTER TABLE `information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `logindata`
 --
 ALTER TABLE `logindata`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `stafflogin`

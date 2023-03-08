@@ -70,6 +70,7 @@ if (isset($_REQUEST['redirect'])) {
     <title>Welcome
         <?php echo $name; ?>
     </title>
+    <link href="css/floatingWindow.css" rel="stylesheet">
     <link href="css/css-homepage.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -77,23 +78,8 @@ if (isset($_REQUEST['redirect'])) {
 </head>
 
 <body>
-    <script src="js/scroll.js" defer>
-            // function hehe(){
-            //     var navBar= document.getElementById("navigatonBAr");
-            //     navBar.classList.add("hello");
-            // }
-            // window.onscroll=function() {hehe()};
-            // var navBar=document.getElementById("navigatonBAr");
-            // var sticky=navBar.offsetTop;
-            // function hehe(){
-            //     if(window.pageYOffset>sticky){
-            //         navBar.classList.add("sticky");
-            //     }
-            //     else{
-            //         navBar.classList.remove("sticky");
-            //     }
-            // }
-    </script>
+    <script src="js/scroll.js" defer></script>
+    <script src="js/floatingWindow.js" defer></script>
     <div class="bgImage" id="bgImage"></div>
     <div class="borderTop" id="borderTop"></div>
     <!-- <div class="borderLeft" id="borderLeft"></div> -->
@@ -123,10 +109,13 @@ if (isset($_REQUEST['redirect'])) {
                     <div id="ToTheLibrary">to the Library</div>
                 </div>
                 <div id="buttonDiv">
-                    <form id="form1" action="#secondDivbgImage" onsubmit="" method="post">
-                        <!-- <input type="hidden" name="mode1" value="1"> -->
+                    <!-- <form id="form1" action="#secondDivbgImage" onsubmit="" method="post">
+                        <input type="hidden" name="mode1" value="1">
                         <input type="submit" value="Browse Books" id="button1">
-                    </form>
+                    </form> -->
+                    <div id="form1">
+                        <a href="#secondDivbgImage"> <input type="button" value="Browse Books" id="button1"> </a>
+                    </div>
                     <?php
                     if ($admin == 'Y') { ?>
                         <form id="form2" action="" onsubmit="">
@@ -176,8 +165,10 @@ if (isset($_REQUEST['redirect'])) {
                             </tr>
                             <?php
                             while ($rowarr2 = mysqli_fetch_array($result2)) {
-                                $x = $rowarr2['Book name'];
-                                $y = $rowarr2['Id'];
+                                $w = $rowarr2['Book name'];
+                                $x = $rowarr2['Author'];
+                                $y = $rowarr2['BOOK id'];
+                                $z = $rowarr2['Id'];
                                 ?>
                                 <tr id="book-detail">
                                     <td>
@@ -190,25 +181,37 @@ if (isset($_REQUEST['redirect'])) {
                                         <?php echo $rowarr2['AVL book']; ?>
                                     </td>
                                     <?php if ($admin == 'Y') { ?>
-                                        <td><a href="addEditBooks.php?idOfBook=<?php echo $rowarr2['Id']; ?>" id="edit">Edit</a></td>
+                                        <td><a href="addEditBooks.php?idOfBook=<?php echo $rowarr2['Id']; ?>" id="edit">Edit</a>
+                                        </td>
                                         <td><a href="" id="delete">Delete</a></td>
                                     <?php } else {
                                         if (in_array($rowarr2['Id'], $arr)) {
                                             ?>
-                                            <td><a onclick="returnConfirm(`<?php echo $x; ?>`,`<?php echo $y; ?>`)" id="return">Return</a>
+                                            <td><a onclick="returnConfirm(`<?php echo $w; ?>`,`<?php echo $z; ?>`)"
+                                                    id="return">Return</a>
                                                 | <a href="returnRenew.php?action=renew" id="renew">Renew</a></td>
                                             <?php
                                         } else {
-
-                                            ?>
-                                            <td><a name="value1" id="booknow"
-                                                    onclick="callConfirm(`<?php echo $x; ?>`,`<?php echo $y; ?>`)" value="">Book Now</a>
-                                            </td>
-                                        <?php } ?>
+                                            if ($rowarr2['AVL book'] == 0) {
+                                                ?>
+                                                <td>
+                                                    <div id="outofstock">Out Of Stock</div>
+                                                </td>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <td><a name="value1" id="booknow"
+                                                        onclick="callConfirmBook(`<?php echo $w; ?>`,`<?php echo $x; ?>`,`<?php echo $y; ?>`,`<?php echo $z; ?>`)"
+                                                        value="">Book Now</a>
+                                                </td>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
                                         <td id=checkboxDiv>
                                             <label class="container">
                                                 <input type="hidden" name="name1" value="<?php echo $rowarr2['Id']; ?>">
-                                                <input type="checkbox" value="checked" name="wishlist-box" id="checkbox">
+                                                <input type="checkbox" value="checked" name="wishlist-box" id="checkboxWishlist">
                                                 <div class="checkmark"></div>
                                             </label>
                                         </td>
@@ -221,7 +224,46 @@ if (isset($_REQUEST['redirect'])) {
 
                     </table>
                 </div>
-                <div class="confirmation invisible">
+                <div class="mainBox invisible">
+                    <div class="contentwhole">
+                        <div class="circleCross" onclick="cross()">
+                            <div class="x">x</div>
+                        </div>
+                        <form action="">
+                            <div class="contentBox">
+                                <div class="bookname"><strong>B</strong>ook name: <span class="phpvar" id="bookName">The
+                                        power of myth</span></div>
+                                <div class="author"><strong>A</strong>uthor: <span class="phpvar"
+                                        id="bookAuthor"></span></div>
+                                <div class="bookId"><strong>B</strong>ook Id: <span class="phpvar" id="BookId"></span>
+                                </div>
+                                <div class="bookTime">You want to take book for : -</div>
+                                <div class="radioBtn">
+                                    <input type="radio" class="radioButtons" name="duration" id="radio-1"
+                                        value="10days">
+                                    <label for="radio-1">10 days</label>
+                                    <input type="radio" class="radioButtons" name="duration" id="radio-2"
+                                        value="20days">
+                                    <label for="radio-2">20 days</label>
+                                    <input type="radio" class="radioButtons" name="duration" id="radio-3"
+                                        value="30days">
+                                    <label for="radio-3">30 days</label>
+                                </div>
+                                <div class="info"><strong>Note!</strong> You need to return within 7 days after the
+                                    return date.
+                                    Further delay will be charged for 5rs/day.</div>
+                                <div class="confirmButton">
+                                    <input type="checkbox" name="terms" id="checkbox" value="good"
+                                        onclick="acceptTnC()">
+                                    <label for="checkbox">I accept all terms and conditions</label>
+                                    <input type="hidden" class="h1" name="bookBook" value="" id="id1">
+                                    <input type="submit" value="Confirm" id="confirmbtn" disabled>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- <div class="confirmation invisible">
                     <div class="confirmationtext">Do you want to purchase</div>
                     <div class="bookName"></div>
                     <div class="buttonDiv">
@@ -230,11 +272,11 @@ if (isset($_REQUEST['redirect'])) {
                             <input type="submit" value="Confirm" id="confirmButton">
                         </form>
                         <form action="" class="buttonDiv2" onsubmit="return false">
-                            <!-- <input type="hidden" name="mode2" value="1"> -->
+                            <input type="hidden" name="mode2" value="1">
                             <input type="button" value="Cancel" id="cancelButton" onclick="cancelled()">
                         </form>
                     </div>
-                </div>
+                </div> -->
                 <div class="returnConfirmation invisible">
                     <div class="confirmationtext1">Do you want to return</div>
                     <div class="bookName1"></div>
@@ -264,7 +306,9 @@ if (isset($_REQUEST['redirect'])) {
                 function myFunction() {
                     var x = document.getElementById("snackbar");
                     x.className = "show";
-                    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+                    setTimeout(function () {
+                        x.className = x.className.replace("show", "");
+                    }, 3000);
                 }
             </script>
             <?php

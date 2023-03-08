@@ -521,12 +521,14 @@ td {
     cursor: grab;
     transition: 0.3s;
 }
+#return:active,
+#renew:active{
+    cursor: grabbing;
+}
 
 #return:link,
-#return:active,
 #return:visited,
 #renew:link,
-#renew:active,
 #renew:visited {
     color: #4b464b;
     text-decoration: none;
@@ -587,8 +589,15 @@ td {
 }
 
 .visible {
-    visibility: visible;
+    /* visibility: visible; */
+    display: flex;
 }
+
+.invisible {
+    /* visibility: hidden; */
+    display: none;
+}
+
 
 .slide-in-fwd-center {
     -webkit-animation: slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) forwards;
@@ -784,9 +793,7 @@ td {
     color: white;
 }
 
-.invisible {
-    visibility: hidden;
-}
+
 
 #snackbar {
     visibility: hidden;
@@ -833,3 +840,7 @@ td {
     from {bottom: 4rem; opacity: 1;}
     to {bottom: 0; opacity: 0;}
   }
+#outofstock{
+    color: red;
+    cursor:not-allowed;
+}

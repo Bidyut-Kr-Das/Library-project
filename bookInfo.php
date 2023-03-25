@@ -1,74 +1,174 @@
 <?php
-    include("connection.php");
-    session_start();
-    $bookId=$_REQUEST['bookid'];
-    
-    $id=$_SESSION['id'];
-    $query1="SELECT * FROM `information` WHERE `id`='$id' ";
-    $result1=mysqli_query($connection,$query1);
-    $rowarr1=mysqli_fetch_array($result1);
-    $name=$rowarr1['Firstname'];
+include("connection/connection.php");
+session_start();
+if (!isset($_SESSION['id'])) {
+    header("location:index.php");
+    exit();
+}
+if ($_SESSION['admin'] != 'Y') {
+    header("location:LibraryHomepage.php?msg=Admin privilage required.");
+}
 
-    $query2="SELECT * FROM `book_info` WHERE `BOOK id`='$bookId' ";
-    $result2=mysqli_query($connection,$query2);
-    $rowarr2=mysqli_fetch_array($result2);
-    // print_r($rowarr2);
-    $bookId1=$rowarr2['BOOK id'];
-    // echo "<script>alert(' ".$bookId1." ')</script>";
-    if(isset($_REQUEST['mode1'])){
-        // $query3="INSERT INTO `bookstaken` SET `student-id`='$id',`BookId`='$bookId1' ";
-        // $result3=mysqli_query($connection,$query3);
-        // echo "<script>alert(' a".$bookId1." ')</script>";
-        header("location:LibraryHomepage.php");
+//declaring empty variables for add book------------------------------------------------>
+
+$oldBookName = "";
+$oldAuthor = "";
+$oldBookId = "";
+$oldDescription = "";
+$oldQuantity = "";
+$editing = false;
+
+// this part is for edit book------------------------------------------------->
+
+
+if (!empty($_REQUEST['idOfBook'])) {
+    $editing = true;
+    $idOfBook = $_REQUEST['idOfBook'];
+    $query1 = "SELECT * FROM `book_info` WHERE `Id`='$idOfBook' ";
+    $result1 = mysqli_query($connection, $query1);
+    $rowarr1 = mysqli_fetch_array($result1);
+    $oldBookName = $rowarr1['Book name'];
+    $oldAuthor = $rowarr1['Author'];
+    $oldDescription = $rowarr1['description'];
+    $oldBookId = $rowarr1['BOOK id'];
+    $oldQuantity = $rowarr1['AVL book'];
+
+}
+//query to add new book------------------------------------------------------------------>
+if (isset($_REQUEST['add'])) {
+    $bookName = $_REQUEST['Bookname'];
+    $bookName = str_replace("'", "\'", $bookName);
+    $author = $_REQUEST['author'];
+    $description = $_REQUEST['desc'];
+    $bookId = $_REQUEST['bookId'];
+    $quantity = $_REQUEST['quantity'];
+    $query = "INSERT INTO `book_info` SET `Book name`='$bookName',
+                                                                                `Author`='$author',
+                                                                                `description`='$description',
+                                                                                `BOOK id`='$bookId',
+                                                                                `AVL book`='$quantity' ";
+    $result = mysqli_query($connection, $query);
+    if ($result) {
+        header("location:LibraryHomepage.php?msg=New Book added successfully!&#secondDivbgImage");
     }
-    // if(isset($_REQUEST['confirm'])){
-    //     echo "<script>alert('a')</script>";
-    // }
-    
+}
+//---------------------------query to update editted book-------------------------------------
+if (isset($_REQUEST['edit'])) {
+    $id = $_REQUEST['edit'];
+    $bookName = $_REQUEST['Bookname'];
+    $bookName = str_replace("'", "\'", $bookName);
+    $author = $_REQUEST['author'];
+    $description = $_REQUEST['desc'];
+    $bookId = $_REQUEST['bookId'];
+    $quantity = $_REQUEST['quantity'];
+    $query = "UPDATE `book_info` SET `Book name`='$bookName',
+                                                                                `Author`='$author',
+                                                                                `description`='$description',
+                                                                                `BOOK id`='$bookId',
+                                                                                `AVL book`='$quantity' 
+                                                                                WHERE `Id`='$id' ";
+    $result = mysqli_query($connection, $query);
+    if ($result) {
+        header("location:LibraryHomepage.php?msg=Book updated successfully!&#secondDivbgImage");
+    }
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Welcome <?php echo $name;?></title>
-        <link href="css/css-bookInfo.css" rel="stylesheet">
-    </head>
-    <body>
-        <script src=""></script>
-        <div class="bgImage" id="bgImage"></div>
-        <div id="supermainDiv">
-            <div class="maindiv" id="mainDiv">
-                <div class="logo" id="logo">
-                    <div id="welcomename">Hello, <?php echo $name;?></div>
-                    <div class="navigationBar" id="navigatonBar">
-                            <div id="home"><a href=""></a> Home</div>
-                            <div id="Wishlist">Wishlist</div>
-                            <div id="Profile"><a href="" id="profile">Profile</a></div>
-                            <div id="Logout"><a href="logout.php" id="logout">Logout</a></div>
-                    </div>
+
+<head>
+    <title>Welcome
+    </title>
+    <link rel="stylesheet" href="css/css-bookInfo.css">
+    <!-- <link href="css/css-bookInfo.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <script src="js/scroll.js" defer></script>
+    <script src="js/floatingWindow.js" defer></script>
+    <div class="bgImage" id="bgImage"></div>
+    <div class="borderTop" id="borderTop"></div>
+    <!-- <div class="borderLeft" id="borderLeft"></div> -->
+    <div id="supermainDiv">
+        <div class="maindiv" id="mainDiv">
+            <div class="scrollToggle" id="scrollToggle"></div>
+            <div class="logo" id="logo">
+                <div id="welcomename">Hello,
+                    <?php echo "name"; ?>
                 </div>
-                <div id="textArea">
-                    <div id="bookInfo">
-                        <div id="bookname"><?php echo $rowarr2['Book name']?></div>
-                        <div id="bookAuthor">Author: <?php echo $rowarr2['Author']?></div>
-                        <div id="description">Description: </div>
-                    </div>
-                    <div id="confirmation">
-                        <div id="confirmationText">Confirm your purchase?</div>
-                        <div id="buttonDiv">
-                            <form action="" class="buttonDiv">
-                                <input type="hidden" name="mode1" value="1">
-                                <input type="submit" name="confirm" id="confirmButton" value="Confirm">
-                            </form>
-                            <form action="" class="buttonDiv">
-                                <input type="hidden" name="mode2">
-                                <input type="submit" name="cancel" id="cancelButton" value="Cancel">
-                            </form>
+                <div class="navigationBar" id="navigatonBAr">
+                    <div id="home"><a href="LibraryHomepage.php#bgImage" id="profile">Home</a></div>
+                    <div id="Wishlist">Wishlist</div>
+                    <div id="Profile"><a onclick="" id="profile">Profile</a></div>
+                    <div id="Logout"><a href="logout.php" id="logout">Logout</a></div>
+                    <div id="searchBar">
+                        <input type="text" name="" id="SearchBox" placeholder="Search Book" value="">
+                        <div class="searchIcon" onclick="searchBook()"><i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                     </div>
                 </div>
             </div>
+            <form action="">
+                <div class=form>
+                    <div class="inputBox1">
+                        <div class="field1">
+                            <input type="text" name="Bookname" id="bookName" value="<?php echo $oldBookName; ?>"
+                                required autocomplete="off">
+                            <span id="bookNameText">Book Name</span>
+                        </div>
+                        <div class="field2">
+                            <input type="text" name="author" id="author" value="<?php echo $oldAuthor; ?>" required
+                                autocomplete="off">
+                            <span id="authorText">Author</span>
+                        </div>
+                    </div>
+                    <div class="inputBox2">
+                        <div class="field3">
+                            <label for="Description" id="descriptionText">Description</label>
+                            <textarea name="desc" id="Description" value="<?php echo $oldDescription; ?>"></textarea>
+                        </div>
+                        <div class="field4">
+                            <div class="subfield1">
+                                <input type="text" name="bookId" id="bookId" value="<?php echo $oldBookId; ?>" required
+                                    autocomplete="off">
+                                <span id="bookIdText">Book Id</span>
+                            </div>
+                            <div class="subfield2">
+                                <input type="number" name="quantity" id="quantity" value="<?php echo $oldQuantity; ?>"
+                                    required autocomplete="off">
+                                <span id="quantityText">Quantity</span>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    if ($editing) {
+                        ?>
+                        <div class="buttondiv">
+                            <input type="hidden" name="edit" value="<?php echo $idOfBook; ?>">
+                            <input type="submit" value="Update" class="button">
+                        </div>
+                        <?php
+                    } else {
+
+                        ?>
+                        <div class="buttondiv">
+                            <input type="hidden" name="add" value="<?php echo $idOfBook; ?>">
+                            <input type="submit" value="Add Book" class="button">
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </form>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
 <?php
 

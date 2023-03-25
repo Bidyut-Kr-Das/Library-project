@@ -71,7 +71,7 @@ if (isset($_REQUEST['mode2'])) {
     $result = mysqli_query($connection, $query);
     if ($result) {
         header("location:LibraryHomepage.php?msg=Book updated successfully!");
-    } 
+    }
 }
 
 
@@ -102,11 +102,10 @@ if (isset($_REQUEST['mode2'])) {
             <div id="marginDiv1">
                 <form action="">
                     <?php
-                    if (!empty($_REQUEST['idOfBook'])){
+                    if (!empty($_REQUEST['idOfBook'])) {
                         ?>
                         <div class="heading slide-right-heading">Edit book details</div>
-
-                    <?php
+                        <?php
                     } else {
                         ?>
                         <div class="heading slide-right-heading">Add new book details</div>

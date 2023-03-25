@@ -1,7 +1,8 @@
 <?php
+
 include("connection/connection.php");
 session_start();
-if (empty($_SESSION['id'])) {
+if (empty($_SESSION['id'])) { //               ! isset($_SESSION['id'])----!True----false
     header("location:index.php");
     exit();
 }
@@ -11,14 +12,58 @@ $query1 = "SELECT * FROM `information` WHERE `id`='$newid'";
 $result1 = mysqli_query($connection, $query1);
 $rowarr1 = mysqli_fetch_array($result1);
 $name = $rowarr1['Firstname'];
+
 //-----------------------searching which books are taken by user-------------------------->    
+
 $arr = array();
 $query4 = "SELECT * FROM `bookstaken` WHERE `student-id`='$newid' ";
 $result4 = mysqli_query($connection, $query4);
 while ($rowarr5 = mysqli_fetch_array($result4)) {
     array_push($arr, $rowarr5['BookId']); //adding the book ids in an array using while loop
 }
-//array[ ]={4,5}
+
+
+//method to calculate the fine and date of return and all
+
+
+if (isset($_REQUEST['returnactivation'])) {
+    $bookid2 = $_REQUEST['returnactivation'];
+    $query5 = "SELECT * FROM `book_info` WHERE `Id`='$bookid2' ";
+    $result5 = mysqli_query($connection, $query5);
+    $rowarr6 = mysqli_fetch_array($result5);
+    $name1 = $rowarr6['Book name'];
+    $query6 = "SELECT * FROM `bookstaken` WHERE `student-id`='$newid' AND `BookId`='$bookid2' ";
+    $result6 = mysqli_query($connection, $query6);
+    $rowarr7 = mysqli_fetch_array($result6);
+    $issuedate = $rowarr7['IssueDate'];
+    $borrowtime = $rowarr7['borrowtime'];
+    $returndate = strtotime(date('Y-m-d', strtotime($issuedate . '+' . $borrowtime)));
+
+    $currentdate = strtotime(date('Y-m-d'));
+    $returndateObj = date_create(date('Y-m-d', strtotime($issuedate . '+' . $borrowtime)));
+    $currdateObj = date_create(date('Y-m-d'));
+    //date create function created a dateTimeObject which is required in date_diff() function
+    $dateDifference = date_diff($currdateObj, $returndateObj);
+    if ($returndate >= $currentdate) { // this line is required to check if return date has exceeded current date.
+        $hasfine = false;
+        $timeLeft = ((int) $dateDifference->format("%a")) + 7;
+    } else {
+        $timeLeft = ((int) $dateDifference->format("%a"));
+        if ($timeLeft > 7) {
+            $hasfine = true;
+            $fine = ($timeLeft - 7) * 5;
+            $timeLeft -= 7;
+        } else {
+            $hasfine = false;
+        }
+        // echo "current date";
+    }
+    //amake ekhane date plus korte hobe and date take function a pathtate hobee tarpor oi div a 
+    //value rakhte hobe tarpor input type hidden a value paste korte hobe.
+    //nahole form refresh hoe jabe. 
+
+
+}
 
 // searching metod------------------------------------------------------------------------->
 
@@ -40,8 +85,9 @@ if (isset($_REQUEST['bookBook'])) {
     $query3 = "SELECT * FROM `book_info` WHERE `Id`='$bookid1' ";
     $result3 = mysqli_query($connection, $query3);
     $rowarr3 = mysqli_fetch_array($result3);
+    $borrowtime = $_REQUEST['duration'];
     $bookQuantity = $rowarr3['AVL book'];
-    header("location:bookUpdate.php?decider=bookBook&bookid=$bookid1&quantity=$bookQuantity");
+    header("location:bookUpdate.php?decider=bookBook&bookid=$bookid1&quantity=$bookQuantity&borrowtime=$borrowtime");
 }
 
 //return book query------------------------------------------------------------------------->
@@ -56,10 +102,10 @@ if (isset($_REQUEST['returnBook'])) {
 }
 
 
-//add book page redirect---------------------------------------------------->
+//add book page redirect(admin)---------------------------------------------------->
 
 if (isset($_REQUEST['redirect'])) {
-    header("location:addEditBooks.php");
+    header("location:bookinfo.php");
 }
 
 ?>
@@ -96,8 +142,9 @@ if (isset($_REQUEST['redirect'])) {
                     <div id="Profile"><a onclick="" id="profile">Profile</a></div>
                     <div id="Logout"><a href="logout.php" id="logout">Logout</a></div>
                     <div id="searchBar">
+                        <div class="clearIcon" onclick="clearIcon()"><i class="fa-solid fa-xmark"></i></div>
                         <input type="text" name="" id="SearchBox" placeholder="Search Book"
-                            value="<?php echo $searching; ?>">
+                            value="<?php echo $searching; ?>" onclick="isSearching()">
                         <div class="searchIcon" onclick="searchBook()"><i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                     </div>
@@ -181,14 +228,13 @@ if (isset($_REQUEST['redirect'])) {
                                         <?php echo $rowarr2['AVL book']; ?>
                                     </td>
                                     <?php if ($admin == 'Y') { ?>
-                                        <td><a href="addEditBooks.php?idOfBook=<?php echo $rowarr2['Id']; ?>" id="edit">Edit</a>
+                                        <td><a href="bookinfo.php?idOfBook=<?php echo $rowarr2['Id']; ?>" id="edit">Edit</a>
                                         </td>
                                         <td><a href="" id="delete">Delete</a></td>
                                     <?php } else {
                                         if (in_array($rowarr2['Id'], $arr)) {
                                             ?>
-                                            <td><a onclick="returnConfirm(`<?php echo $w; ?>`,`<?php echo $z; ?>`)"
-                                                    id="return">Return</a>
+                                            <td><a onclick="returnWindow(`<?php echo $z; ?>`)" id="return">Return</a>
                                                 | <a href="returnRenew.php?action=renew" id="renew">Renew</a></td>
                                             <?php
                                         } else {
@@ -224,6 +270,9 @@ if (isset($_REQUEST['redirect'])) {
 
                     </table>
                 </div>
+                <div class="addWishlistBtn"><input type="submit" name="addToWishlist" id="addToWishlist"
+                        value="Add to Wishlist">
+                </div>
                 <div class="mainBox invisible">
                     <div class="contentwhole">
                         <div class="circleCross" onclick="cross()">
@@ -231,8 +280,8 @@ if (isset($_REQUEST['redirect'])) {
                         </div>
                         <form action="">
                             <div class="contentBox">
-                                <div class="bookname"><strong>B</strong>ook name: <span class="phpvar" id="bookName">The
-                                        power of myth</span></div>
+                                <div class="bookname"><strong>B</strong>ook name: <span class="phpvar" id="bookName">
+                                    </span></div>
                                 <div class="author"><strong>A</strong>uthor: <span class="phpvar"
                                         id="bookAuthor"></span></div>
                                 <div class="bookId"><strong>B</strong>ook Id: <span class="phpvar" id="BookId"></span>
@@ -240,91 +289,103 @@ if (isset($_REQUEST['redirect'])) {
                                 <div class="bookTime">You want to take book for : -</div>
                                 <div class="radioBtn">
                                     <input type="radio" class="radioButtons" name="duration" id="radio-1"
-                                        value="10days">
+                                        value="10 days" required>
                                     <label for="radio-1">10 days</label>
                                     <input type="radio" class="radioButtons" name="duration" id="radio-2"
-                                        value="20days">
+                                        value="20 days" required>
                                     <label for="radio-2">20 days</label>
                                     <input type="radio" class="radioButtons" name="duration" id="radio-3"
-                                        value="30days">
+                                        value="30 days" required>
                                     <label for="radio-3">30 days</label>
                                 </div>
                                 <div class="info"><strong>Note!</strong> You need to return within 7 days after the
                                     return date.
                                     Further delay will be charged for 5rs/day.</div>
                                 <div class="confirmButton">
-                                    <input type="checkbox" name="terms" id="checkbox" value="good"
-                                        onclick="acceptTnC()">
-                                    <label for="checkbox">I accept all terms and conditions</label>
+                                    <input type="checkbox" name="terms" id="checkbox1" value="good"
+                                        onclick="acceptTnC1()">
+                                    <label for="checkbox1">I accept all terms and conditions</label>
                                     <input type="hidden" class="h1" name="bookBook" value="" id="id1">
-                                    <input type="submit" value="Confirm" id="confirmbtn" disabled>
+                                    <input type="submit" value="Confirm" id="confirmbtn1" disabled>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <!-- <div class="confirmation invisible">
-                    <div class="confirmationtext">Do you want to purchase</div>
-                    <div class="bookName"></div>
-                    <div class="buttonDiv">
-                        <form action="" class="buttonDiv1" method="post">
-                            <input type="hidden" class="h1" name="bookBook" value="" id="id1">
-                            <input type="submit" value="Confirm" id="confirmButton">
-                        </form>
-                        <form action="" class="buttonDiv2" onsubmit="return false">
-                            <input type="hidden" name="mode2" value="1">
-                            <input type="button" value="Cancel" id="cancelButton" onclick="cancelled()">
+                <div class="mainBox2 invisible">
+                    <!-- <script>returnVisible()</script> -->
+                    <div class="contentwhole">
+                        <div class="circleCross" onclick="returnInvisible()">
+                            <div class="x">x</div>
+                        </div>
+                        <form action="">
+                            <div class="contentBox">
+                                <div class="bookname"><strong>B</strong>ook name: <span class="phpvar"
+                                        id="ReturnBookName"><?php echo $name1; ?></span></div>
+                                <div class="issueDate"><strong>I</strong>ssue Date: <span class="phpvar">
+                                        <?php echo $issuedate; ?>
+                                    </span></div>
+                                <div class="returnPeriod"><strong>R</strong>eturn Period: <span class="phpvar">
+                                        <?php
+                                        if ($hasfine) {
+                                            echo "Over " . $timeLeft . " days";
+                                        } else {
+                                            echo $timeLeft . " days";
+                                        }
+
+                                        ?>
+                                    </span>
+                                </div>
+                                <?php if ($hasfine) { ?>
+                                    <div class="fineText">Your fine is: <span class="fine">
+                                            <?php echo $fine; ?>/-
+                                        </span></div>
+                                <?php } ?>
+                                <div class="info"><strong>Note!</strong>Return period is valid for 7 days after return
+                                    date is over. No fine is charged if returned within return period. Further delay is
+                                    charged for 5/- per day.</div>
+                                <div class="payButton">
+                                    <input type="checkbox" name="terms" id="checkbox2" value="good"
+                                        onclick="acceptTnC2()">
+                                    <label for="checkbox2">I accept the the above fine</label>
+                                    <input type="hidden" name="returnBook" value="<?php echo $bookid2; ?>">
+                                    <input type="submit" value="<?php if ($hasfine) {
+                                        echo "Pay";
+                                    } else {
+                                        echo "Return";
+                                    } ?>" id="confirmbtn2" disabled>
+                                </div>
+                            </div>
                         </form>
                     </div>
-                </div> -->
-                <div class="returnConfirmation invisible">
-                    <div class="confirmationtext1">Do you want to return</div>
-                    <div class="bookName1"></div>
-                    <div class="buttonDivReturn">
-                        <form action="" class="buttonDiv1" method="post">
-                            <input type="hidden" class="h1" name="returnBook" value="" id="id2">
-                            <input type="submit" value="Confirm" id="confirmButton1">
-                        </form>
-                        <form class="buttonDiv2" onsubmit="return false">
-                            <!-- <input type="hidden" name="mode2" value="1"> -->
-                            <input type="button" value="Cancel" id="cancelButton1" onclick="cancelled()">
-                        </form>
-                    </div>
-                </div>
-                <script src="js/search.js" defer></script>
-                <?php
-                $msg = "";
-                if (isset($_REQUEST['msg'])) {
-                    $msg = $_REQUEST['msg'];
-                }
-                ?>
-                <div id="snackbar">
-                    <?php echo $msg; ?>
                 </div>
             </div>
-            <script>
-                function myFunction() {
-                    var x = document.getElementById("snackbar");
-                    x.className = "show";
-                    setTimeout(function () {
-                        x.className = x.className.replace("show", "");
-                    }, 3000);
-                }
-            </script>
-            <?php
-            if (isset($_REQUEST['msg'])) {
-                $msg = $_REQUEST['msg'];
-                echo "<script>
-                        myFunction();  
-                    </script>";
-            }
-
-
-            ?>
+        </div>
+        <script src="js/search.js"></script>
+        <?php
+        $msg = "";
+        if (isset($_REQUEST['msg'])) {
+            $msg = $_REQUEST['msg'];
+        }
+        ?>
+        <div class="snackbarbox">
+            <div id="snackbar">
+                <?php echo $msg; ?>
+            </div>
         </div>
     </div>
-
-
+    <?php
+    if (isset($_REQUEST['msg'])) {
+        $msg = $_REQUEST['msg'];
+        echo "<script>
+                        myFunction();  
+                    </script>";
+    }
+    //this bottom part is to check if url have returnactivation and make the return popup visible
+    if (isset($_REQUEST['returnactivation'])) {
+        echo "<script>returnVisible()</script>";
+    }
+    ?>
 </body>
 
 </html>

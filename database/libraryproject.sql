@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2023 at 04:35 PM
+-- Generation Time: Mar 12, 2023 at 08:57 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -30,21 +30,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `bookstaken` (
   `id` int(11) NOT NULL,
   `student-id` int(11) NOT NULL,
-  `BookId` varchar(256) NOT NULL
+  `BookId` varchar(256) NOT NULL,
+  `IssueDate` varchar(256) NOT NULL COMMENT 'year-month-date',
+  `borrowtime` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bookstaken`
 --
 
-INSERT INTO `bookstaken` (`id`, `student-id`, `BookId`) VALUES
-(58, 19, '1'),
-(60, 19, '4'),
-(61, 19, '1'),
-(62, 19, '1'),
-(63, 19, '2'),
-(64, 19, '3'),
-(65, 19, '12');
+INSERT INTO `bookstaken` (`id`, `student-id`, `BookId`, `IssueDate`, `borrowtime`) VALUES
+(1136, 19, '2', '2023-03-11', '10 days'),
+(1137, 19, '3', '2023-03-11', '30 days'),
+(1138, 19, '4', '2023-03-12', '');
 
 -- --------------------------------------------------------
 
@@ -66,17 +64,18 @@ CREATE TABLE `book_info` (
 --
 
 INSERT INTO `book_info` (`Id`, `Book name`, `Author`, `description`, `BOOK id`, `AVL book`) VALUES
-(1, 'THE POWER OF MYTH', 'Joseph Campbell', '', 'TPOM0001', 80),
-(2, 'THE RAGER\'S EDGE ', 'Somerset maugham', '', 'TRE00012', 989),
-(3, 'CATCHER IN THE RYE', 'JD Salinger', '', 'CITE0098', 998),
-(4, 'RUMI', '*CONTROVERTIAL', '', 'RUMI1236', 998),
-(5, 'AUTOBIOGRAPHY OF A YOGI', 'Paramahansa yogananda', '', 'AOY76890', 999),
-(6, 'MAN\'S SEARCH FOR MEANING', 'Vectior E ', '', 'MSFM9876', 99),
-(8, 'THE BHAGAVAD GITA ', 'Sanjoy', 'Not provided', 'TBG9854', 780),
-(9, 'NINE lives ', 'William Dalrymple', 'Not provided', 'NL1278', 897),
-(10, 'YOGA OF HEART ', 'Mark Whitwell', 'Not provided', 'YOH7689', 760),
+(1, 'THE POWER OF MYTH', 'Joseph Campbell', '', 'TPOM0001', 3),
+(2, 'THE RAGER\'S EDGE ', 'Somerset maugham', '', 'TRE00012', 987),
+(3, 'CATCHER IN THE RYE', 'JD Salinger', '', 'CITE0098', 995),
+(4, 'RUMI', '*CONTROVERTIAL', '', 'RUMI1236', 997),
+(5, 'AUTOBIOGRAPHY OF A YOGI', 'Paramahansa yogananda', '', 'AOY76890', 998),
+(6, 'MAN\'S SEARCH FOR MEANING', 'Vectior E ', '', 'MSFM9876', 1),
+(8, 'THE BHAGAVAD GITA ', 'Sanjoy', 'Not provided', 'TBG9854', 779),
+(9, 'NINE lives ', 'William Dalrymple', 'Not provided', 'NL1278', 896),
+(10, 'YOGA OF HEART ', 'Mark Whitwell', 'Not provided', 'YOH7689', 758),
 (11, 'hello\'s book', 'bkd', 'hululu', 'THWA', 300),
-(12, 'new book', 'bidyut', '', 'bhola', 122);
+(12, 'new book', 'bidyut', '', 'bhola', 122),
+(13, 'test book', 'me', 'hulului', '123tre', 123);
 
 -- --------------------------------------------------------
 
@@ -134,8 +133,6 @@ INSERT INTO `logindata` (`ID`, `username`, `Password`, `info-id`, `Admin`) VALUE
 --
 
 CREATE TABLE `stafflogin` (
-  `id` int(11) NOT NULL,
-  `username` varchar(256) NOT NULL,
   `Password` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -181,12 +178,6 @@ ALTER TABLE `logindata`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `stafflogin`
---
-ALTER TABLE `stafflogin`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tableofbooks`
 --
 ALTER TABLE `tableofbooks`
@@ -200,13 +191,13 @@ ALTER TABLE `tableofbooks`
 -- AUTO_INCREMENT for table `bookstaken`
 --
 ALTER TABLE `bookstaken`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1139;
 
 --
 -- AUTO_INCREMENT for table `book_info`
 --
 ALTER TABLE `book_info`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `information`
@@ -219,12 +210,6 @@ ALTER TABLE `information`
 --
 ALTER TABLE `logindata`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `stafflogin`
---
-ALTER TABLE `stafflogin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tableofbooks`

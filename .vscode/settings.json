@@ -20,5 +20,8 @@
         "titleBar.activeForeground": "#15202b",
         "titleBar.inactiveBackground": "#47ca8599",
         "titleBar.inactiveForeground": "#15202b99"
-    }
+    },
+    "editor.formatOnSave": true,
+    "editor.mouseWheelZoom": true,
+    "editor.tabCompletion": "on"
 }

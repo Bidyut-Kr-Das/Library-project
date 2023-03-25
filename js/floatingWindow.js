@@ -26,9 +26,9 @@ function cross(){
 //disabled button if checkbox not checked------------------------------------------------------------------->
 
 
-function acceptTnC(){
-    const checkbox= document.getElementById("checkbox");
-    const confirmbtn= document.getElementById("confirmbtn");
+function acceptTnC1(){
+    const checkbox= document.getElementById("checkbox1");
+    const confirmbtn= document.getElementById("confirmbtn1");
     if(checkbox.hasAttribute("checked")){
         confirmbtn.setAttribute("disabled","");
         checkbox.removeAttribute("checked");
@@ -36,5 +36,15 @@ function acceptTnC(){
         confirmbtn.removeAttribute("disabled","");
         checkbox.setAttribute("checked","");
     }
-    
+}
+function acceptTnC2(){
+    const checkbox= document.getElementById("checkbox2");
+    const confirmbtn= document.getElementById("confirmbtn2");
+    if(checkbox.hasAttribute("checked")){
+        confirmbtn.setAttribute("disabled","");
+        checkbox.removeAttribute("checked");
+    }else{
+        confirmbtn.removeAttribute("disabled","");
+        checkbox.setAttribute("checked","");
+    } 
 }

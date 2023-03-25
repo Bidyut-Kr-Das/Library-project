@@ -163,7 +163,7 @@ input[type="radio"]:checked+label {
     top:0.5rem;
     left: 2rem;
 }
-#confirmbtn{
+#confirmbtn1{
     position: absolute;
     right: 6rem;
     bottom: 1.4rem;
@@ -178,13 +178,39 @@ input[type="radio"]:checked+label {
     transition: 0.5s;
     box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.5);
 }
-#confirmbtn:hover{
+#confirmbtn2{
+    position: absolute;
+    right: 6rem;
+    bottom: 1.4rem;
+    height: 3.5rem;
+    width: 15rem;
+    border-radius: 1rem;
+    background-color: #4681f4;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.5);
+}
+#confirmbtn1:hover{
     background-color: #5783db;
 }
-#confirmbtn:active{
+#confirmbtn1:active{
     box-shadow: .3rem .3rem .5rem rgba(0,0,0,0.5);
 }
-#confirmbtn:disabled{
+#confirmbtn1:disabled{
+    background-color: gray;
+    color: #696969;
+    cursor: not-allowed;
+}
+#confirmbtn2:hover{
+    background-color: #5783db;
+}
+#confirmbtn2:active{
+    box-shadow: .3rem .3rem .5rem rgba(0,0,0,0.5);
+}
+#confirmbtn2:disabled{
     background-color: gray;
     color: #696969;
     cursor: not-allowed;
@@ -202,4 +228,35 @@ strong{
     font-family: rounded;
     color: #696969;
 }
-
+.mainBox2 {
+    /* width: 70rem;
+    height: 36rem; */
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* border: 1px solid red; */
+    /* position: absolute; */
+    /* margin: 2rem 10rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+}
+.payButton{
+    width: 100%;
+    height: 4rem;
+    position: relative;
+}
+.payButton input[type="checkbox"]{
+    transform: scale(1.2);
+    accent-color: #645cbb;
+}
+.payButton label{
+    position: absolute;
+    font-size: 1.3rem;
+    top:0.5rem;
+    left: 2rem;
+}

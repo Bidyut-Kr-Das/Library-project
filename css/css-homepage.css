@@ -8,6 +8,11 @@
     src: url(fonts/Itim-Regular.ttf);
 }
 
+@font-face {
+    font-family: rounded;
+    src: url(../fonts/VarelaRound-Regular.ttf);
+}
+
 :root {
     --height1: 300vh;
 }
@@ -143,6 +148,55 @@ body {
 
 }
 
+.clearIcon {
+    border-radius: 2rem;
+    height: 3rem;
+    width: 3rem;
+    color: #E3242B;
+    background-color: #ffffff;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 1.8rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+
+}
+
+.moveRight {
+    animation: moveRight 0.5s ease, ;
+    -webkit-animation: moveRight 0.5s ease;
+}
+
+
+@keyframes moveRight {
+    0% {
+        transform: translateX(3rem);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes moveLeft {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(3rem);
+        opacity: 0;
+    }
+}
+
 #SearchBox {
     height: 3rem;
     width: 21rem;
@@ -165,7 +219,8 @@ body {
 
 #SearchBox:focus {
     border: none;
-    outline: .3rem solid #03C04A;
+    /* outline: .3rem solid #03C04A; */
+    outline: none;
 }
 
 .searchIcon {
@@ -333,7 +388,8 @@ body {
     /* padding-top: 10rem; */
     display: flex;
     /* align-items: center; */
-    justify-content: center;
+    justify-content: start;
+    flex-direction: column;
 }
 
 /* Hide the default checkbox */
@@ -521,8 +577,9 @@ td {
     cursor: grab;
     transition: 0.3s;
 }
+
 #return:active,
-#renew:active{
+#renew:active {
     cursor: grabbing;
 }
 
@@ -793,54 +850,113 @@ td {
     color: white;
 }
 
-
-
 #snackbar {
     visibility: hidden;
-    width: 35rem;
-    height: 4rem;
+    width: 40rem;
+    height: 6rem;
     /* min-width: 250px; */
     /* margin-left: -125px; */
     background-color: #4D455D;
-    color: #FFB84C;
+    color: white;
     text-align: center;
     border-radius: .2rem;
-    padding: 1rem;
+    /* padding: 1rem; */
+    padding-top: 2rem;
     position: fixed;
     z-index: 1;
-    border: .3rem solid #FFB84C;
-    /* left: 50%; */
+    border-radius: 1rem;
+    /* border: .3rem solid #FFB84C; */
+    /* left: auto; */
+    /* letter-spacing: .2rem; */
     bottom: 4rem;
-    font-size: 2.5rem;
-    font-family: itim;
-  }
-  
-  #snackbar.show {
+    font-size: 2rem;
+    font-family: rounded;
+    /* box-sizing: border-box; */
+    box-sizing: border-box;
+}
+
+.snackbarbox {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#snackbar.show {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  }
-  
-  @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 4rem; opacity: 1;}
-  }
-  
-  @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 4rem; opacity: 1;}
-  }
-  
-  @-webkit-keyframes fadeout {
-    from {bottom: 4rem; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
-  }
-  
-  @keyframes fadeout {
-    from {bottom: 4rem; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
-  }
-#outofstock{
+}
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 4rem;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 4rem;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 4rem;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 4rem;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+#outofstock {
     color: red;
-    cursor:not-allowed;
+    cursor: not-allowed;
+}
+
+.fine {
+    color: #E3242B;
+}
+
+#addToWishlist {
+    margin-top: 4rem;
+    float: right;
+    margin-right: 4rem;
+    height: 5rem;
+    width: 30rem;
+    border-radius: 3rem;
+    background-color: #03C04A;
+    outline: none;
+    border: .3rem solid white;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    letter-spacing: .2rem;
+    cursor: pointer;
 }
